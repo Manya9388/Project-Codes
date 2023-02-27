@@ -1,0 +1,110 @@
+<html>
+<form role="form" action="actionproduct.php" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="name">Product Name</label>
+        <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name">
+    </div>
+    <div class="form-group">
+<?php
+$con=mysqli_connect("localhost","root","","clothing");
+
+
+$sql=mysqli_query($con,"select * from tbl_category WHERE cstatus=0"); 
+?>
+<label>Category Name</label><br>
+
+
+<select   name="cid" id="category" onchange="showResult(this.value)" class="form-control m-bot15" required >
+<option value="">--select--</option>
+<?php
+while($row=mysqli_fetch_array($sql))
+{
+
+?>
+<option value="<?php echo $row[0] ?>" ><?php echo $row[1] ?></option>
+
+<?php
+
+}
+?>
+
+</select></div>
+<div class="form-group">
+<?php
+$con=mysqli_connect("localhost","root","","clothing");
+
+
+$sql=mysqli_query($con,"select * from tbl_subcategory WHERE status=0"); 
+?>
+<label>Subcategory Name</label><br>
+
+
+<select   name="sid" id="sub_category" onchange="showResult(this.value)" class="form-control m-bot15" required >
+<option value="">--select--</option>
+<?php
+while($row=mysqli_fetch_array($sql))
+{
+
+?>
+<option value="<?php echo $row[0] ?>" ><?php echo $row[2] ?></option>
+<?php
+
+}
+?>
+
+</select></div>                       <div class="form-group">
+        <label for="des">Product Description</label>
+        <input type="text" class="form-control" name="des" id="des">
+    </div>
+      <div class="form-group">           
+        <label for="image">Product image</label>
+        <input type="file" class="form-control" accept="image/gif, image/jpeg, image/png, image/jpg"  name="photo" id="image">
+    </div>
+   
+    <div class="panel-body">
+
+   <div class="row">
+     
+    <div class="col-md-4 form-group">
+    <label for="qua">Product Quantity</label>
+<input type="number"  class="form-control" name="quantity">
+
+</div>
+
+<div class="col-md-3 form-group">
+
+    <label for="measure">Measure In </label>
+    <select class="form-control m-bot15" name="measure">
+    <option>---Select---</option>
+<option>Kg</option>
+<option>Lr</option>
+<option>Gr</option>
+
+</select>
+
+
+</div>
+<div class="col-md-4 form-group">
+    <label for="price">Price</label>
+<input type="text"  class="form-control" name="price">
+
+</div>
+
+</div>
+</div>
+<button type="submit" name="btnsubmit"class="btn btn-info">Submit</button>
+</form>
+</div>
+
+</div>
+</section>
+
+</div>
+<div class="col-lg-12">
+
+</div>
+</div>
+<div class="row">
+
+</div>
+</html>
