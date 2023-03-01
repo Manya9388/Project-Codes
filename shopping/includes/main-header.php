@@ -21,7 +21,7 @@
             <input class="search-field" placeholder="Search here..." name="product" required="required" />
 
             <button class="search-button" type="submit" name="search"></button>    
-
+            
         </div>
     </form>
 </div><!-- /.search-area -->

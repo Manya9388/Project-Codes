@@ -6,7 +6,7 @@
        
         $quantity= $_POST['quantity'];
 
-        $sql= "INSERT INTO tbl_cart VALUES(null,$product_id,0, $quantity,1)";
+        $sql= "INSERT INTO tbl_cart VALUES(null,$product_id,16, $quantity,1)";
         $cart_res= mysqli_query($conn, $sql);
         if($cart_res){
             echo "<script>

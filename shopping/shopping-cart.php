@@ -98,9 +98,9 @@ while($row=mysqli_fetch_array($query))
                   <td><?php echo htmlentities($cnt);?></td>
                   <td><?php echo htmlentities($row['product']);?></td>
                   <td><?php echo htmlentities($row['price']);?></td>
-				  <td class="quantity-box">
-                                        <input type="number" name="quantity" size="4" value="<?php echo $row['quantity']; ?>" min="1" class="c-input-text qty text">
-                                    </td>
+				  <td>
+                  <input type="number" class="form-control itemQty" value="<?= $row['quantity'] ?>" style="width:75px;">
+                </td>
 
                                             <?php
 				$total_quantity = $row["quantity"];
@@ -136,8 +136,8 @@ while($row=mysqli_fetch_array($query))
                 
               </tr> 
                                     </table>
+									<a href="checkout.php" class="btn btn-info <?= ($grand_total > 1) ? '' : 'disabled'; ?>"><i class="far fa-credit-card"></i>&nbsp;&nbsp;Checkout</a>
 									
-									                             </div>
                             </div>
 				<!-- ============================================== INFO BOXES ============================================== -->
 
