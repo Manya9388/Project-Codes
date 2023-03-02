@@ -102,7 +102,7 @@ include('includes/config.php');
 						     <i class="icon fa fa-dollar"></i>
 						</div>
 						<div class="col-xs-10">
-							<h4 class="info-box-heading green">money back</h4>
+							<h4 class="info-box-heading orange">money back</h4>
 						</div>
 					</div>	
 					<h6 class="text">30 Day Money Back Guarantee.</h6>
@@ -130,7 +130,7 @@ include('includes/config.php');
 							<i class="icon fa fa-gift"></i>
 						</div>
 						<div class="col-xs-10">
-							<h4 class="info-box-heading red">Special Sale</h4>
+							<h4 class="info-box-heading orange">Special Sale</h4>
 						</div>
 					</div>
 					<h6 class="text">All items-sale up to 20% off </h6>	

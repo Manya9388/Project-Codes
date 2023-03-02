@@ -77,13 +77,13 @@ else{
                         <div class="navbar-nav mr-auto">
                             <a href="#" class="nav-item nav-link">Home</a>
                             <a href="shopping/index.php" class="nav-item nav-link">Products</a>
-                            <a href="shopping/shopping-cart.php" class="nav-item nav-link">Cart</a>
-                            <a href="#" class="nav-item nav-link">Checkout</a>
+                            <a href="shopping/my-cart.php" class="nav-item nav-link">Cart</a>
+                           
                             <a href="#" class="nav-item nav-link active">My Account</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
                                 <div class="dropdown-menu">
-                                    <a href="wishlist.php" class="dropdown-item">Wishlist</a>
+                                    <a href="shopping/viewwish.php" class="dropdown-item">Wishlist</a>
                                     <a href="#" class="dropdown-item">Contact Us</a>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@ else{
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
                                 <div class="dropdown-menu">
-                                    <a href="#" class="dropdown-item">Account</a>
+                                    <a href="accountview.php" class="dropdown-item">Account</a>
                                     <a href="#" class="dropdown-item">Update</a>
                                     <a href="changep.html" class="dropdown-item">Change Password</a>
                                 </div>

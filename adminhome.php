@@ -486,7 +486,7 @@ while($row=mysqli_fetch_array($query))
                                          
                                         <div class="col-md-4 form-group">
                                         <label for="qua">Product Quantity</label>
-                                    <input type="number"  class="form-control" name="quantity">
+                                    <input type="number"  class="form-control" name="quantity" min=0 max=10>
                                     
                                     </div>
                                     

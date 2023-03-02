@@ -35,6 +35,7 @@ if(isset($_POST['submit']))
 	else if($_SESSION['role']=='user')
 	{
 	  $_SESSION['message']="Welcome";
+	  $_SESSION['email']="$email";
 	   header("location:my_account.php");
 	  exit(0);
 	}

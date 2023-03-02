@@ -834,7 +834,7 @@ span.nav-description{
 }
 
 #main-navigation li.green>a, #main-navigation .green ul.wide-dropdown, #main-navigation li.green{
-	background:#2ecc71;
+	background:#d3690c;
 }
 
 #main-navigation li.purple>a, #main-navigation .purple ul.wide-dropdown, #main-navigation li.purple{
@@ -866,7 +866,7 @@ span.nav-description{
 }
 
 #main-navigation .nav-search:hover{
-	background:#16a085!important;	
+	background:#a34e12!important;	
 }
 
 #main-navigation .nav-search .icons{
@@ -901,7 +901,7 @@ span.nav-description{
 	background:#34495e;
 	position:absolute;
 	z-index:1000;
-	color:#fff;
+	color:#f77707;
 	padding:15px 120px 0 0;
 	top:0;
 	left:0;

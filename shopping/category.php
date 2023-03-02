@@ -200,7 +200,7 @@ while($row=mysqli_fetch_array($sql))
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane active " id="grid-container">
 							<div class="category-product  inner-top-vs">
-															<div class="row">									
+							<form method="POST"action="manage_cart.php">												<div class="row">									
 			<?php
 $ret=mysqli_query($conn,"select * from tbl_products where cat_id='$cat_id'");
 $num=mysqli_num_rows($ret);
@@ -229,20 +229,24 @@ while ($row=mysqli_fetch_array($ret))
 				<span class="price">
 					Rs. <?php echo htmlentities($row['price']);?>			</span>
 										     <span class="price-before-discount">Rs. <?php echo htmlentities($row['price']);?></span>
-									
+											 <!--<label for="quantity">Quantity: </label>-->
+                            <input class="text-center" type='number'  name='quantity' value="1".$row["quantity"]."' min='1' max='50'>				
 			</div><!-- /.product-price -->
 			
 		</div><!-- /.product-info -->
 					<div class="cart clearfix animate-effect">
 				<div class="action">
 					<ul class="list-unstyled">
+					<li>
+                            <input type="text" value="<?php echo $row['product_id']?>" name="product_id" hidden>
+                            <input type="text" value="<?php echo $_GET['cat_id']?>" name="cat_id" hidden>
+                            
+                        </li>
 						<li class="add-cart-button btn-group">
 						
 								<?php if($row['quantity'] > 0){?>
-										<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-								<i class="fa fa-shopping-cart"></i>													
-							</button>
-							<div class="action" style="color:red"><a href="./cart.php?product_id=<?php echo $row['product_id']?>">Add to cart</a></div>
+									<button class="btn btn-primary icon" data-toggle="dropdown" type="button"><i class="fa fa-shopping-cart"></i></button>
+                                    <input class="btn btn-primary" type="submit" name="add_to_cart" value="Add to cart">
 								<?php } else {?>
 							<div class="action" style="color:red">Out of Stock</div>
 					<?php } ?>
@@ -269,7 +273,7 @@ while ($row=mysqli_fetch_array($ret))
 		
 <?php } ?>	
 		
-	
+	  </form>
 		
 										</div>
 							</div>

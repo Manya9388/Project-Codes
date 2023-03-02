@@ -1,34 +1,24 @@
 <?php
+include 'config.php';
 session_start();
-if($_SESSION['email']){
-   
-}
-else{
-    header("location:index.php");
-}
-?>
-<?php
-session_start();
-include('config.php');
-if(isset($_POST['submit']))
-{
-$email = $_POST['email'];
-        
-        $newpassword = $_POST['newpassword'];
-        $confirmnewpassword = $_POST['confirmnewpassword'];
-        $sql = "SELECT password FROM tbl_login WHERE email='$email'";
-        $res=mysqli_query($conn,$sql);
-}      
-if(!$res)
-{
-  
-    echo "The email you entered does not exist";
+// if(!empty($_SESSION['email']))
+// {
+//     echo $_SESSION['email'];
+// }
+// echo $pass_value;
+if(isset($_POST['submit_reset'])){
+    $password = $_POST['password'];
+    $newpassword = $_POST['newpassword'];
+    $renewpassword = $_POST['renewpassword'];
+    if($newpassword != $renewpassword){
+        echo '<script> alert ("Password doesnot match");</script>';
+        echo'<script>window.location.href="updatePass.php";</script>';
     }
     else{
-    
-    $sql2="UPDATE tbl_login SET password='$newpassword' where email='$email'";
-    header("Location: my_account.php");
+        $insert = "UPDATE `tbl_login` SET `password`='$newpassword'where email='silpa@gmail.com'";
+        mysqli_query($conn,$insert);
+        echo '<script> alert ("Password updated successfully");</script>';
+        echo'<script>window.location.href="my_account.php";</script>';
     }
-
-
-  ?>
+}
+?>
