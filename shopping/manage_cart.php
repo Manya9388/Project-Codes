@@ -27,8 +27,13 @@
                 }
             }else{
            
-        
-                $addtocart_res= mysqli_query($conn,"INSERT INTO tbl_cart VALUES(null,$product_id,12,$quantity,0)");
+                $sql3=mysqli_query($conn,"SELECT log_id from tbl_login where email='$email'");
+                while($row=mysqli_fetch_array($sql3))
+                {
+                  $a=$row['log_id'];
+                $addtocart_res= mysqli_query($conn,"INSERT INTO tbl_cart VALUES(null,$product_id,$a,$quantity,0)");
+            }
+                //$addtocart_res= mysqli_query($conn,"INSERT INTO tbl_cart VALUES(null,$product_id,12,$quantity,0)");
                 if(mysqli_insert_id($conn) >= 0){
                     echo "<script>
                         alert('Product added to cart successfully.');

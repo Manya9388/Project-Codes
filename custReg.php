@@ -30,15 +30,8 @@ $sql="select * from tbl_login where (email='$email' or password='$password');";
 		}
     else{
  
- $sql2 = "INSERT INTO tbl_login (email,password,role,status) VALUES ('$email','$password','user',0)";
- $sql1 = "INSERT INTO tbl_customerreg (fname,lname,phone,address,city,region,pincode,district,log_id) VALUES ('$fname','$lname','$phone','$address','$city','$region','$pincode','$district','$log_id')";
- if(mysqli_query($conn, $sql1)){
-  echo "Records added successfully.";
-} 
-else{
-  echo "ERROR: Could not able to execute $sql1. " . mysqli_error($conn);
-}
-
+// $sql2 = "INSERT INTO tbl_login (email,password,role,status) VALUES ('$email','$password','user',0)";
+ 
 $sql2 = "INSERT INTO tbl_login (email,password,role,status) VALUES ('$email','$password','user',0)";
 if(mysqli_query($conn, $sql2)){
 echo "Records added successfully.";
@@ -46,6 +39,19 @@ header('LOCATION:login.html');
 } else{
 echo "ERROR: Could not able to execute $sql2. " . mysqli_error($conn);
 }
+$sql3=mysqli_query($conn,"SELECT log_id from tbl_login where email='$email'");
+while($row=mysqli_fetch_array($sql3))
+{
+  $a=$row['log_id'];
+$sql1 = mysqli_query($conn,"INSERT INTO tbl_customerreg (fname,lname,phone,address,city,region,pincode,district,log_id) VALUES ('$fname','$lname','$phone','$address','$city','$region','$pincode','$district','$a')");
+}
+ if(mysqli_query($conn, $sql1)){
+  echo "Records added successfully.";
+} 
+else{
+  echo "ERROR: Could not able to execute $sql1. " . mysqli_error($conn);
+}
+
 }
 }
 

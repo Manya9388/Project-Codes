@@ -1,7 +1,7 @@
 <?php
-	
+	session_start();
 	include('config.php');
-	
+	$email=$_SESSION['email'];
 	?>
 
 <!DOCTYPE html>
@@ -53,6 +53,8 @@
 			<script src="assets/js/html5shiv.js"></script>
 			<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
+		<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 	</head>
 	
@@ -128,7 +130,7 @@ tr{
 	
 	<!-- ============================================== HEADER ============================================== -->
 <header class="header-style-1">
-<?php include('includes/top-header.php');?>
+<!-- <php include('includes/top-header.php');?> -->
 <?php include('includes/main-header.php');?>
 
 </header>
@@ -179,14 +181,21 @@ tr{
 										<?php
 											$all_total=0;
 											$sr=0;
-										
-											$mycart_record_res= mysqli_query($conn,"SELECT * from tbl_cart ");
+											$sql3=mysqli_query($conn,"SELECT log_id from tbl_login where email='$email'");
+											while($row=mysqli_fetch_array($sql3))
+											{
+											  $a=$row['log_id'];
+											$mycart_record_res= mysqli_query($conn,"SELECT * from tbl_cart where log_id=$a ");
 											if(mysqli_num_rows($mycart_record_res) > 0)
 											{
 												foreach($mycart_record_res as $row){
 													$sr++;
 													$product_id= $row['product_id'];
-													$prod_sql= mysqli_query($conn,"SELECT * from tbl_products WHERE product_id=$product_id");
+													
+  $prod_sql= mysqli_query($conn,"SELECT * from tbl_products WHERE product_id=$product_id ");
+
+
+													//$prod_sql= mysqli_query($conn,"SELECT * from tbl_products WHERE product_id=$product_id AND ");
 													if(mysqli_num_rows($prod_sql) == 1){
 														$pred_details_res= mysqli_fetch_array($prod_sql);
 														$each_total= $row["quantity"]*$pred_details_res["price"];
@@ -217,7 +226,8 @@ tr{
 																	<form action='manage_cart.php' method='POST'>
 																		<input type='text' name='product_id' value=".$row["product_id"]." hidden>
 																		<button name='Remove_Item' class='btn btn-sm btn-outline-danger'>REMOVE</button>
-																	</form>
+
+																		</form>
 																
 																</td>
 															
@@ -230,7 +240,7 @@ tr{
 												}
 											
 											}
-											
+										}
 										?>
 										
 									</tbody>
@@ -244,6 +254,8 @@ tr{
 										<h5 class="text-right">Rs. <?php echo $all_total; ?></h5>
 										<br>
 										<form>
+										<input type="hidden" id="name1" value="<?php echo $email; ?>">
+
 											<div class="form-check">
 												<!-- <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"> -->
 												<center><label class="form-check-label" for="flexRadioDefault1"> Make Order</label></center>
@@ -254,12 +266,47 @@ tr{
 											<a href="cash.php" button class="btn btn-primary btn-block">Cash On Delivery</button></a>
 											<!-- <a href="deliveryform.php" button class="btn btn-primary btn-block">Cash On Delivery</button></a> -->
 											<br><br>
-											<button class="btn btn-primary btn-block">Online Payment</button>
+											<input type="button" id="rzp-button1"name="btn"value="pay now"class="btn btn-primary" onclick="pay_now()"/>
 										</form>
 									</div>
 								</div>
 								<!-- </form> -->
 							</div>
-							
+							<script>
+//   console.log("hello");
+// var amt ="100";
+    function pay_now(){
+		var name = jQuery('#name1').val();
+		console.log(name);
+		
+        var amount=<?php echo $all_total ?>;
+        var options =  {
+            "key": "rzp_test_LTTLupnsoN3Mu7", // Enter the Key ID generated from the Dashboard
+            "amount": amount*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "Clothing Management System",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "handler":function(response){
+              
+               jQuery.ajax({
+                   type:"POST",
+                   url: "payment_process.php",
+                   data:"payment_id="+response.razorpay_payment_id+"&amount="+amount+"&name="+name,
+                   success:function(result){
+                       window,location.href="thankyou.php";
+                   }
+               });
+              
+      }
+        
+    
+};
+var rzp1 = new Razorpay(options);
+
+    rzp1.open();
+    
+    }
+</script>
 						</body>
 					</html>
