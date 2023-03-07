@@ -208,8 +208,7 @@ tr{
 																
 																<td><p id='prod_name'>".$pred_details_res["product"]."</p></td>
 																<td>
-																
-  </td>
+																</td>
 																<td>".$pred_details_res["price"]."</td>
 
 																
@@ -247,7 +246,7 @@ tr{
 
 								</table>
 								<!-- <form action="deliveryform.php" method="POST"> -->
-
+									<?php if($all_total>0){ ?>
 								<div class="col-lg-4" id="mycart-total">
 									<div class="border bg-light rounded p-4">
 										<h3>Total:</h3>
@@ -263,15 +262,17 @@ tr{
 											</div>
 											<br>
 											
-											<a href="cash.php" button class="btn btn-primary btn-block">Cash On Delivery</button></a>
+											<a href="checkout.php"class="btn btn-primary btn-block" >Shipping Details</button></a>
 											<!-- <a href="deliveryform.php" button class="btn btn-primary btn-block">Cash On Delivery</button></a> -->
 											<br><br>
-											<input type="button" id="rzp-button1"name="btn"value="pay now"class="btn btn-primary" onclick="pay_now()"/>
+						
+											<input type="button" id="rzp-button1"name="btn"value="pay now"class="btn btn-primary btn-block" onclick="pay_now()"  />
 										</form>
 									</div>
 								</div>
 								<!-- </form> -->
 							</div>
+							<?php } ?>
 							<script>
 //   console.log("hello");
 // var amt ="100";
@@ -307,6 +308,9 @@ var rzp1 = new Razorpay(options);
     rzp1.open();
     
     }
+///enable code/////
+
+ 
 </script>
 						</body>
 					</html>

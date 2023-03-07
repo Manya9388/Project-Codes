@@ -117,7 +117,7 @@ if(isset($_POST['submit_otp'])){
 </head>
 <body>
     <div class="navbar">
-        <a class="left" href="index.php"><img src="imgs/main-logo.png" alt="BookMyTickets" width="200" height="80"></a>
+        <a class="left" href="index.php"><img src="imgs/main-logo.png" alt="Estore" width="200" height="80"></a>
     </div>
     <form action="" method="POST">
     <table>

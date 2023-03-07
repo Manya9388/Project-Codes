@@ -216,12 +216,13 @@ while ($row=mysqli_fetch_array($ret))
 			<div class="image">
 			<img src="<?php echo $a ?>" alt="" width="200" height="200"></a>
 				
-		</div><!-- /.image -->			                      		   
+		</div><!-- /.image -->	
+		
 		</div><!-- /.product-image -->
 			
 		
 		<div class="product-info text-left">
-			<h3 class="name"><a href="product-details.php?product_id=<?php echo htmlentities($row['id']);?>"><?php echo htmlentities($row['product']);?></a></h3>
+			<h3 class="name"><a href="single.php?product_id=<?php echo htmlentities($row['product_id']);?>"><?php echo htmlentities($row['product']);?></a></h3>
 			
 			<div class="description"></div>
 
@@ -229,9 +230,11 @@ while ($row=mysqli_fetch_array($ret))
 				<span class="price">
 					Rs. <?php echo htmlentities($row['price']);?>			</span>
 										     <span class="price-before-discount">Rs. <?php echo htmlentities($row['price']);?></span>
-											 <!--<label for="quantity">Quantity: </label>-->
-                            <input class="text-center" type='number'  name='quantity' value="1".$row["quantity"]."' min='1' max='50'>				
-			</div><!-- /.product-price -->
+											
+                            <input class="text-center" type='number'  name='quantity' value="1".$row["quantity"]."' min='1' max='50'hidden >				
+			<label for="quantity">Size:</label>
+			<?php echo htmlentities($row['size']);?>   
+						</div><!-- /.product-price -->
 			
 		</div><!-- /.product-info -->
 					<div class="cart clearfix animate-effect">

@@ -20,38 +20,42 @@
         <h4 class="text-center text-info p-2">Complete your order!</h4>
         <div class="jumbotron p-3 mb-2 text-center">
          <!-- <h6 class="lead"><b>Product(s) : </b><?= $allItems; ?></h6>-->
-          <h6 class="lead"><b>Delivery Charge : </b>Free</h6>
+         <!-- <h6 class="lead"><b>Delivery Charge : </b>Free</h6>-->
           <!--<h5><b>Total Amount Payable : <?php echo $grand_total ?>/-</h5>-->
         </div>
         <form action="checkout2.php" method="post" id="placeOrder">
           <input type="hidden" name="products" value="<?= $allItems; ?>">
           <input type="hidden" name="grand_total" value="<?= $grand_total; ?>">
           <div class="form-group">
-            <input type="text" name="name" class="form-control" placeholder="Enter Name" required>
+            <input type="text" name="name" class="form-control" placeholder="Name" required>
+          </div>
+          <h5><label  class="fa fa-map-marker" > Address</label></h5>
+          <div class="form-group">
+            <input name="house" class="form-control" placeholder="House no / Building Name" required>
           </div>
           <div class="form-group">
-            <input type="email" name="email" class="form-control" placeholder="Enter E-Mail" required>
+            <input name="road" class="form-control" placeholder="Road Name / Area / Colony" required>
           </div>
           <div class="form-group">
-            <input type="tel" name="phone" class="form-control" placeholder="Enter Phone" required>
+            <input name="pincode" class="form-control" placeholder="Pincode" required>
           </div>
           <div class="form-group">
-            <textarea name="address" class="form-control" rows="3" cols="10" placeholder="Enter Delivery Address Here..."></textarea>
-          </div>
-          <h6 class="text-center lead">Select Payment Mode</h6>
-          <div class="form-group">
-            <select name="pmode" class="form-control">
-              <option value="" selected disabled>-Select Payment Mode-</option>
-              <option value="cod">Cash On Delivery</option>
-              <option value="netbanking">Net Banking</option>
-              <option value="cards">Debit/Credit Card</option>
-            </select>
+            <input name="city" class="form-control" placeholder="City" required>
           </div>
           <div class="form-group">
+            <input name="state" class="form-control" placeholder="State" required>
+          </div>
+          <div class="form-group">
+            <input name="location" class="form-control" placeholder="Near by location" required>
+          </div>
+          <div class="form-group">
+            <input type="tel" name="phone" class="form-control"  pattern="[0-9]{10}" required placeholder="Phone Number ">
+          </div>
+         <div class="form-group">
             <input type="submit" name="submit" value="Place Order"onClick="document.location.href='checkout2.php';" class="btn btn-danger btn-block">
             
           </div>
-          <div><input type="submit" name="submit" value="Cancel" onClick="document.location.href='shopping-cart.php';" />
+          <div><input type="submit" name="cancel" value="Cancel" onClick="document.location.href='my-cart.php';"class="btn btn-danger btn-block" />
 </div>
         </form>
       </div>

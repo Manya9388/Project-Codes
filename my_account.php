@@ -146,7 +146,7 @@ else{
                                 <i class="fa fa-heart"></i>
                                 <span></span>
                             </a>
-                            <a href="shopping/shopping-cart.php" class="btn cart">
+                            <a href="shopping/my-cart.php" class="btn cart">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span></span>
                             </a>
@@ -166,10 +166,10 @@ else{
                     <div class="col-md-3">
                         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
                             <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
-                            <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Orders</a>
-                            <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Payment Method</a>
-                            <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-map-marker-alt"></i>Address</a>
-                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#customize-tab" role="tab"><i class="fa fa-user"></i>Customize</a>
+                            <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Customized Orders</a>
+                            <!--<a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Payment Method</a>-->
+                            <a class="nav-link" href="old/index.html"><i class="fa fa-sign-out-alt"></i>Customize T-Shirt</a>
+                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#customize-tab" role="tab"><i class="fa fa-user"></i>Customize Garments</a>
                             <a class="nav-link" href="logout.php"><i class="fa fa-sign-out-alt"></i>Logout</a>
                         </div>
                     </div>
@@ -195,7 +195,7 @@ else{
                                             </tr>
                                         </thead>
                                         <?php
-              include('config.php');
+             // include('config.php');
               $query=mysqli_query($conn,"SELECT tbl_customize.type,tbl_customize.status,tbl_designerreg.phone from tbl_customize join tbl_designerreg on tbl_customize.des_id=tbl_designerreg.des_id");
               
 $cnt=1;
@@ -233,8 +233,8 @@ while($row=mysqli_fetch_array($query))
                                     
                                 </p> 
                             </div>
-                            <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
-                                <h4>Address</h4>
+                            <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="address-nav">
+                                <h4>Payment</h4>
                                 <div class="row">
                                     <!--<div class="col-md-6">
                                         <h5>Payment Address</h5>
