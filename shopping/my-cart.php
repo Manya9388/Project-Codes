@@ -207,8 +207,8 @@ tr{
 																
 																
 																<td><p id='prod_name'>".$pred_details_res["product"]."</p></td>
-																<td>
-																</td>
+															
+															
 																<td>".$pred_details_res["price"]."</td>
 
 																

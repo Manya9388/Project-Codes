@@ -250,18 +250,13 @@ while ($row=mysqli_fetch_array($ret))
 								<?php if($row['quantity'] > 0){?>
 									<button class="btn btn-primary icon" data-toggle="dropdown" type="button"><i class="fa fa-shopping-cart"></i></button>
                                     <input class="btn btn-primary" type="submit" name="add_to_cart" value="Add to cart">
-								<?php } else {?>
+								
+						<input class="btn btn-primary" type="submit" name="wishlist" value="Wishlist">
+									<?php } else {?>
 							<div class="action" style="color:red">Out of Stock</div>
 					<?php } ?>
 													
-						</li>
-	                   
-		                <li class="lnk wishlist">
-						<div class="action" style="color:red"><a href="../wishlist.php?product_id=<?php echo $row['product_id']?>">Wishlist</a></div>
-								 
-							</a>
-						</li>
-
+						
 						
 					</ul>
 				</div>

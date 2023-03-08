@@ -93,7 +93,7 @@
 				     	<div class="well">
 <!--					      	<h3>Tee Styles</h3>-->
 <!--						      <p>-->
-						      	<select id="tshirttype">                        
+						      	<select id="tshirttype" >                        
 				                    <option value="img/crew_front.png" selected="selected">Short Sleeve Shirts</option>
 				                    <option value="img/mens_longsleeve_front.png">Long Sleeve Shirts</option>                                        
 				                    <option value="img/mens_hoodie_front.png">Hoodies</option>                    
@@ -144,7 +144,7 @@
                             <div>
                                 <hr>
 							     <form action="" method="post" enctype="multipart/form-data">
-                                     <input type="file" name="fileToUpload" id="fileToUpload">
+                                     <input type="file" name="img" id="fileToUpload">
                                      <input class="btn btn-primary" type="submit" value="Upload Custom Image" name="submit">
                                 </form>
 							  
@@ -241,6 +241,8 @@
 			      	</table>			
 			      </p>
 					<button type="button" class="btn btn-large btn-block btn-success" name="addToTheBag" id="addToTheBag">Add to bag <i class="icon-briefcase icon-white"></i></button>
+
+					<input type="submit" name="cancel" value="Cancel" onClick="document.location.href='../my_account.php';"class="btn btn-danger btn-block" />
 		      </div>		      		       		   
 		    </div>
 		

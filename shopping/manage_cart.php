@@ -93,7 +93,25 @@
                </script>";
            }
        }
-       
+       if(isset($_POST['wishlist']))
+         {
+            $product_id= $_POST['product_id'];
+            $cat_id= $_POST['cat_id'];
+            $sqlq="SELECT log_id from tbl_login where email='$email'";
+            $resu = mysqli_query($conn, $sqlq);
+            $row = mysqli_fetch_assoc($resu);
+            $log_id= $row['log_id'];
+
+            
+           
+            $addtocart_res= mysqli_query($conn,"INSERT INTO tbl_wishlist VALUES(null,$product_id,0,1)");
+            if(mysqli_insert_id($conn) >= 0){
+                echo "<script>
+                    alert('Product added to wishlist successfully.');
+                    window.href=location='category.php?cat_id=$cat_id';
+                </script>";
+       }
+    }
     }
         
     
