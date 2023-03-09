@@ -194,7 +194,7 @@ tr{
 													
   $prod_sql= mysqli_query($conn,"SELECT * from tbl_products WHERE product_id=$product_id ");
 
-
+  
 													//$prod_sql= mysqli_query($conn,"SELECT * from tbl_products WHERE product_id=$product_id AND ");
 													if(mysqli_num_rows($prod_sql) == 1){
 														$pred_details_res= mysqli_fetch_array($prod_sql);
@@ -208,7 +208,7 @@ tr{
 																
 																<td><p id='prod_name'>".$pred_details_res["product"]."</p></td>
 															
-															
+															<td></td>
 																<td>".$pred_details_res["price"]."</td>
 
 																
@@ -223,13 +223,14 @@ tr{
 																
 																<td>
 																	<form action='manage_cart.php' method='POST'>
+																	
 																		<input type='text' name='product_id' value=".$row["product_id"]." hidden>
 																		<button name='Remove_Item' class='btn btn-sm btn-outline-danger'>REMOVE</button>
-
 																		</form>
 																
 																</td>
-															
+																
+																
 															</tr>
 														";
 													}
@@ -293,7 +294,7 @@ tr{
                jQuery.ajax({
                    type:"POST",
                    url: "payment_process.php",
-                   data:"payment_id="+response.razorpay_payment_id+"&amount="+amount+"&name="+name,
+                   data:"payment_id="+response.razorpay_payment_id+"&amount="+amount,
                    success:function(result){
                        window,location.href="thankyou.php";
                    }

@@ -131,24 +131,95 @@ else{
                 <div class="row">
                     <div class="col-md-3">
                         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-                            <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
-                            <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Orders</a>
+                            <a class="nav-link active" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-cart"></i>Orders</a>
+                            <a class="nav-link " id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Tshirts</a>
                             <a class="nav-link" id="payment-nav" data-toggle="pill" href="#category-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Category</a>
-                            <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-shopping-cart"></i>Add Products</a>
-                            
+                            <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Products</a>
                             <a class="nav-link" id="account-nav" data-toggle="pill" href="#subc-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Subcategory</a>
                             <a class="nav-link" href="logout.php"><i class="fa fa-sign-out-alt"></i>Logout</a>
                         </div>
                     </div>
                     <div class="col-md-9">
                         <div class="tab-content">
-                            <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
-                                <h4>Dashboard</h4>
-                                <p>
+                            <div class="tab-pane fade" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
+                            <html>
+                                    <form role="form" action="actiontshirt.php" method="post" >
+                                        
+                                    <div class="panel-body">
                                     
-                                </p> 
+                                    <div class="col-md-3 form-group">
+                                    
+                                        <label for="measure">Tshirt Category </label>
+                                        <select class="form-control m-bot15" name="tcategory">
+                                        <option>---Select---</option>
+                                    <option>Short sleeve shirts</option>
+                                    <option>Long sleeve shirts</option>
+                                    <option>Hoodies</option>
+                                    <option>Tank tops</option>
+                                    
+                                    </select>
+                                    
+                                    
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                    
+                                        <label for="measure">Colour </label>
+                                        <select class="form-control m-bot15" name="tcolour">
+                                        <option>---Select---</option>
+                                    <option>White</option>
+                                    <option>Dark Heather</option>
+                                    <option>Gray</option>
+                                    <option>Charcoal</option>
+                                    <option>Black</option>
+                                    <option>Heather Orange</option>
+                                    <option>Heather Dark Chocolate</option>
+                                    <option>Salmon</option>
+                                    <option>Chesnut</option>
+                                    <option>Dark chocolate</option>
+                                    <option>Citrus Yellow</option>
+                                    <option>Avacardo</option>
+                                    <option>Kiwi</option>
+                                    <option>Irish Green</option>
+                                    <option>Scrub Green</option>
+                                    <option>Teal Ice</option>
+                                    <option>Heather Sapphire</option>
+                                    <option>Sky</option>
+                                    <option>Antique Sapphire</option>
+                                    <option>Heather Navy</option>
+                                    <option>Cherry Red</option>
+                                    </select>
+                                </div>
+                                    <div class="col-md-3 form-group">
+                                    
+                                        <label for="measure">Size </label>
+                                        <select class="form-control m-bot15" name="tsize">
+                                        <option>---Select---</option>
+                                    <option>S</option>
+                                    <option>M</option>
+                                    <option>L</option>
+                                    <option>XL</option>
+                                    <option>XXL</option>
+                                    </select>
+                                    
+                                    
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                    <label for="qua"> Quantity</label>
+                                    <input type="number" id="tquantity" name="tquantity" min="1" max="50">
+                                    
+                                  
+                                    </div>
+                                    <button type="submit" name="btnsubmit8"class="btn btn-info">Submit</button>
+                                    
+                                    </div>
+                                
+                                    </form>
+                       
+                                    
+                                    </html> 
+                              
                             </div>
-                            <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
+                            <div class="tab-pane fade show active" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                         <thead class="thead-dark">
@@ -517,20 +588,7 @@ while($row=mysqli_fetch_array($query))
                                     </div>
                                 </div>
                                     </div>
-                                   
-                                    
-                            </section>
-                                    
-                                    </div>
-                                    <div class="col-lg-12">
-                                    
-                                    </div>
-                                    </div>
-                                    <div class="row">
-                                    
-                                    </div>
-                                    </html> 
-                            </div>
+            
                             <div class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
                                 <h4>Account Details</h4>
                                 <div class="row">
