@@ -1,19 +1,24 @@
 <?php
 include('config.php');
+session_start();
+$email=$_SESSION['email'];
+$sqlq="SELECT log_id from tbl_login where email='$email'";
+  $resu = mysqli_query($conn, $sqlq);
+  $row = mysqli_fetch_assoc($resu);
+  $log_id= $row['log_id'];
+  echo $log_id;
 
-if(isset($_POST["submit"]))
-{
-
-    $name=$_POST['name'];
-    $house=$_POST['house'];
-    $road=$_POST['road'];
-    $pincode=$_POST['pincode'];
-    $city=$_POST['city'];
-    $state=$_POST['state'];
-    $location=$_POST['location'];
+  
+    $fname=$_POST['fname'];
+    $lname=$_POST['lname'];
     $phone=$_POST['phone'];
-    
-    $sql=mysqli_query($conn,"INSERT INTO tbl_order(order_id,name,house,road,pincode,city,state,location,phone,status) VALUES(null,'$name','$house','$road','$pincode','$city','$state','$location','$phone',0)");
+    $address=$_POST['address'];
+    $city=$_POST['city'];
+    $region=$_POST['region'];
+    $pincode=$_POST['pincode'];
+    $district=$_POST['district'];
+  
+    $sql=mysqli_query($conn,"INSERT INTO tbl_oaddress(oadd_id,log_id,fname,lname,phone,address,city,region,pincode,district,status) VALUES(null,'$log_id','$fname','$lname','$phone','$address','$city','$region','$pincode','$district',0)");
 
     if($sql)
       {
@@ -24,5 +29,7 @@ if(isset($_POST["submit"]))
       {
     echo "<script>alert('Error');window.location='my-cart.php'</script>";
       }
-    }	
+    
+
+    
 ?>

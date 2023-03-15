@@ -70,6 +70,7 @@ else{
                                     <a id="address-nav" data-toggle="pill" href="#categoryview-tab" role="tab" class="dropdown-item">Category</a>
                                     <a id="address-nav" data-toggle="pill" href="#subcategoryview-tab" role="tab" class="dropdown-item">Sub-category</a>
                                     <a id="address-nav" data-toggle="pill" href="#productview-tab" role="tab" class="dropdown-item">Products</a>
+                                    <a id="address-nav" data-toggle="pill" href="#tshirtview-tab" role="tab" class="dropdown-item">Tshirts</a>
                                 </div>
                             </div>
                             
@@ -429,6 +430,58 @@ while($row=mysqli_fetch_array($query))
     </div>
 </div>
 </div>
+
+<div class="tab-pane fade" id="tshirtview-tab" role="tabpanel" aria-labelledby="payment-nav">
+                                
+                                <div class="panel-body">
+                                    <div class="position-center">
+                                        
+                                    <table style="width:75%"cellpadding="10" cellspacing="4" border="3" align="center">
+              
+              <tr>
+                  <th>SERIAL NO</th>
+                  <th>TSHIRT CATEGORY</th>
+                  <th>COLOUR</th>
+                  <th>SIZE</th>
+                  <th>QUANTITY</th>
+                  <th>ACTION</th>
+                  <th>UPDATE</th>
+              </tr>
+          
+              
+              <?php
+             
+              $query=mysqli_query($conn,"SELECT * from tbl_tshirt");
+              
+$cnt=1;
+while($row=mysqli_fetch_array($query))
+{
+   
+?>                                  
+              <tr>
+                  <td><?php echo htmlentities($cnt);?></td>
+                  <td><?php echo htmlentities($row['tcategory']);?></td>
+                  <td><?php echo htmlentities($row['tcolour']);?> </td>
+                  <td><?php echo htmlentities($row['tsize']);?> </td>
+                  <td><?php echo htmlentities($row['tquantity']);?> </td>
+               <td>
+               <?php
+                    if($row['status']==1){
+                        echo '<p><a href="tinactivate.php?id='.$row['t_id'].'$status=1">INACTIVE</a></p>';
+                    }else{
+                        echo '<p><a href="tactivate.php?id='.$row['t_id'].'$status=0">ACTIVE</a></p>';
+                    }
+                    ?>
+               <td><a href="tedit.php?t_id=<?php echo $row['t_id']?>">EDIT</a></td>
+              </tr>
+              <?php $cnt=$cnt+1; } ?>
+              
+      </table>
+    </div>
+</div>
+</div>
+
+
 <div class="tab-pane fade" id="productview-tab" role="tabpanel" aria-labelledby="payment-nav">
                                 
                                 <div class="panel-body">

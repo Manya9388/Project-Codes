@@ -69,9 +69,9 @@
 					<?php
 						$total=0;
 						$sr=0;
-						include '../dbconn.php';
+						include 'config.php';
 						$log_id= $_SESSION['log_id'];
-						$mycart_record_res= mysqli_query($conn,"SELECT * from tbl_cart WHERE log_id=$log_id");
+						$mycart_record_res= mysqli_query($conn,"SELECT * from tbl_cart WHERE log_id=$log_id AND status=1");
 						if(mysqli_num_rows($mycart_record_res) > 0)
 						{
 							
@@ -89,6 +89,7 @@
 											
 											
 											<td><p id='product'>".$pred_details_res["product"]."</p></td>
+											<td><img src='images1/".$pred_details_res["img"]."' alt='Product Image' width='120' height='142'>
 											<td>".$pred_details_res["price"]."</td>
 											
 											<td><input class='text-center' type='number' name='quantity' value='".$row["quantity"]."' min='1' max='10'></td>

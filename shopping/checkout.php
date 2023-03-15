@@ -13,7 +13,21 @@
 </head>
 
 <body>
-  
+<?php
+include('config.php');
+session_start();
+$email=$_SESSION['email'];
+$sqlq="SELECT log_id from tbl_login where email='$email'";
+$resu = mysqli_query($conn, $sqlq);
+$row = mysqli_fetch_assoc($resu);
+$log_id= $row['log_id'];
+
+
+$query=mysqli_query($conn,"select * from tbl_customerreg where log_id='$log_id'");
+if(mysqli_num_rows($query) > 0) {
+  while($row=mysqli_fetch_array($query)) {
+
+?>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-6 px-4 pb-4" id="order">
@@ -27,36 +41,38 @@
           <input type="hidden" name="products" value="<?= $allItems; ?>">
           <input type="hidden" name="grand_total" value="<?= $grand_total; ?>">
           <div class="form-group">
-            <input type="text" name="name" class="form-control" placeholder="Name" required>
+            <input type="text" name="fname" class="form-control" placeholder="First Name" value="<?php echo $row['fname'];?>">
+          </div>
+          <div class="form-group">
+            <input type="text" name="lname" class="form-control" placeholder="Last Name" value="<?php echo $row['lname'];?>">
           </div>
           <h5><label  class="fa fa-map-marker" > Address</label></h5>
           <div class="form-group">
-            <input name="house" class="form-control" placeholder="House no / Building Name" required>
+            <input name="address" class="form-control" placeholder="House no / Building Name" value="<?php echo $row['address'];?>">
           </div>
           <div class="form-group">
-            <input name="road" class="form-control" placeholder="Road Name / Area / Colony" required>
+            <input name="city" class="form-control" placeholder="City" value="<?php echo $row['city'];?>" >
           </div>
           <div class="form-group">
-            <input name="pincode" class="form-control" placeholder="Pincode" required>
+            <input name="region" class="form-control" placeholder="Region" value="<?php echo $row['region'];?>">
           </div>
           <div class="form-group">
-            <input name="city" class="form-control" placeholder="City" required>
+            <input name="pincode" class="form-control" placeholder="Pincode" value="<?php echo $row['pincode'];?>">
           </div>
           <div class="form-group">
-            <input name="state" class="form-control" placeholder="State" required>
+            <input name="district" class="form-control" placeholder="District" value="<?php echo $row['district'];?>">
           </div>
           <div class="form-group">
-            <input name="location" class="form-control" placeholder="Near by location" required>
-          </div>
-          <div class="form-group">
-            <input type="tel" name="phone" class="form-control"  pattern="[0-9]{10}" required placeholder="Phone Number ">
+            <input type="tel" name="phone" class="form-control"  pattern="[0-9]{10}"  placeholder="Phone Number "value="<?php echo $row['phone'];?>">
           </div>
          <div class="form-group">
             <input type="submit" name="submit" value="Place Order"onClick="document.location.href='checkout2.php';" class="btn btn-danger btn-block">
             
           </div>
-          <div><input type="submit" name="cancel" value="Cancel" onClick="document.location.href='my-cart.php';"class="btn btn-danger btn-block" />
-</div>
+     
+<!--<div><input type="submit" name="edit" value="EDIT" onClick="document.location.href='checkout2.php';"class="btn btn-danger btn-block" />
+</div>-->
+<?php }} ?>
         </form>
       </div>
     </div>

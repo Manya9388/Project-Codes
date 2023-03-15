@@ -1,14 +1,34 @@
 <?php 
 include('config.php');
-$n=$_SESSION['email'];
-echo $email;
+session_start();
+$email=$_SESSION['email'];
+
 if(isset($_POST['payment_id']) && isset($_POST['amount'])){
-    $pymnt_id=$_POST['payment_id'];
-    $amt=$_POST['amount'];
-    $payment_status="completed";
+    $sqlq="SELECT log_id from tbl_login where email='$email'";
+$resu = mysqli_query($conn, $sqlq);
+$row = mysqli_fetch_assoc($resu);
+$log_id= $row['log_id'];
+
+$sql = mysqli_query($conn, "SELECT * from tbl_cart where log_id='$log_id'");
+while($row = mysqli_fetch_array($sql)){
+    $cart_id = $row['cart_id'];
     
-   // mysqli_query($conn,"DELETE FROM `tbl_cart` where username='$nme'");
-    mysqli_query($conn,"INSERT INTO `tbl_payment`( `amount`,`payment_id`,`payment_status`)
-     VALUES ('$amt','$pymnt_id', '$payment_status')");
+    $amt = $_POST['amount'];
+    $payment_status = "completed";
+    $sql3 = "INSERT INTO `tbl_payment`(`amount`, `payment_status`, `log_id`, `cart_id`) VALUES ('$amt', '$payment_status', '$log_id', '$cart_id')";
+    $result = $conn->query($sql3);
     
-}?>
+    if($result){
+        $pay_id = $conn->insert_id;
+        $sql4 = "INSERT INTO tbl_order (pay_id,status) VALUES ( '$pay_id','0')";
+        $result = $conn->query($sql4);
+        
+        if($result){
+            // Delete cart items that were added to the order
+            $sql5 = "UPDATE tbl_cart SET status='0' WHERE cart_id = '$cart_id'";
+            $result2 = $conn->query($sql5);
+        } 
+    }
+}
+}
+?>

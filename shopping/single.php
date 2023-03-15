@@ -51,6 +51,7 @@ session_start();
 	<!-- //top-header -->
 
 	<!-- header-bottom-->
+	<form action="manage_cart.php" method="POST">
 	<div class="header-bot">
 		<div class="container">
 			<div class="row header-bot_inner_wthreeinfo_header_mid">
@@ -166,11 +167,40 @@ while ($row=mysqli_fetch_array($ret))
 							<i class="far fa-hand-point-right mr-2"></i>
 							<label>Occassion:</label>
                             <?php echo $row["occassion"]; ?>
+							
+							<div class="cart clearfix animate-effect">
+				<div class="action">
+					
+					
+                            <input type="text" value="<?php echo $row['product_id']?>" name="product_id" hidden>
+                            <input type="text" value="<?php echo $row['cat_id']?>" name="cat_id" hidden>
+                            
+                    
+						
+						
+								<?php if($row['quantity'] > 0){?>
+									<input class="text-center" type='number'  name='quantity' value="1".$row["quantity"]."' min='1' max='50'hidden >
+									<div><button class="btn btn-primary icon" data-toggle="dropdown" type="button"><i class="fa fa-shopping-cart"></i></button></div>
+                                    <div><input class="btn btn-primary" type="submit" name="add_to_cart" value="Add to cart"></div>
+									
+						<input class="btn btn-primary" type="submit" name="wishlist" value="Wishlist">
+									<?php } else {?>
+							<div class="action" style="color:red">Out of Stock</div>
+					<?php } ?>
+													
+						
+						
+				
+				</div>
+			</div>
 						<p class="my-sm-4 my-3">
 							<i class="fas fa-retweet mr-3"></i>Net banking & Credit/ Debit/ ATM card
 						</p>
 					</div>
-					
+					</div>                    
+          <div><input type="submit" name="cancel" value="Cancel" onClick="document.location.href='category.php?pro';"class="btn btn-danger btn-block" />
+</div>
+</form>
 				</div>
 			</div>
 		</div>

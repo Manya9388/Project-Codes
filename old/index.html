@@ -72,7 +72,7 @@
 
   <!-- Navbar
     ================================================== -->
-
+	<form method="POST"action="tshirtaction.php">
     <div class="container">
 		<section id="typography">
 		  <div class="page-header">
@@ -103,27 +103,27 @@
 					      </div>
 					      <div class="well">
 							<ul class="nav">
-								<li class="color-preview" title="White" style="background-color:#ffffff;"></li>
-								<li class="color-preview" title="Dark Heather" style="background-color:#616161;"></li>
-								<li class="color-preview" title="Gray" style="background-color:#f0f0f0;"></li>
-								<li class="color-preview" title="Charcoal" style="background-color:#5b5b5b;"></li>
-								<li class="color-preview" title="Black" style="background-color:#222222;"></li>
-								<li class="color-preview" title="Heather Orange" style="background-color:#fc8d74;"></li>
-								<li class="color-preview" title="Heather Dark Chocolate" style="background-color:#432d26;"></li>
-								<li class="color-preview" title="Salmon" style="background-color:#eead91;"></li>
-								<li class="color-preview" title="Chesnut" style="background-color:#806355;"></li>
-								<li class="color-preview" title="Dark Chocolate" style="background-color:#382d21;"></li>
-								<li class="color-preview" title="Citrus Yellow" style="background-color:#faef93;"></li>
-								<li class="color-preview" title="Avocado" style="background-color:#aeba5e;"></li>
-								<li class="color-preview" title="Kiwi" style="background-color:#8aa140;"></li>
-								<li class="color-preview" title="Irish Green" style="background-color:#1f6522;"></li>
-								<li class="color-preview" title="Scrub Green" style="background-color:#13afa2;"></li>
-								<li class="color-preview" title="Teal Ice" style="background-color:#b8d5d7;"></li>
-								<li class="color-preview" title="Heather Sapphire" style="background-color:#15aeda;"></li>
-								<li class="color-preview" title="Sky" style="background-color:#a5def8;"></li>
-								<li class="color-preview" title="Antique Sapphire" style="background-color:#0f77c0;"></li>
-								<li class="color-preview" title="Heather Navy" style="background-color:#3469b7;"></li>							
-								<li class="color-preview" title="Cherry Red" style="background-color:#c50404;"></li>
+								<li class="color-preview" value="White" style="background-color:#ffffff;"></li>
+								<li class="color-preview" value="Dark Heather" style="background-color:#616161;"></li>
+								<li class="color-preview" value="Gray" style="background-color:#f0f0f0;"></li>
+								<li class="color-preview" value="Charcoal" style="background-color:#5b5b5b;"></li>
+								<li class="color-preview" value="Black" style="background-color:#222222;"></li>
+								<li class="color-preview"value="Heather Orange" style="background-color:#fc8d74;"></li>
+								<li class="color-preview" value="Heather Dark Chocolate" style="background-color:#432d26;"></li>
+								<li class="color-preview" value="Salmon" style="background-color:#eead91;"></li>
+								<li class="color-preview"value="Chesnut" style="background-color:#806355;"></li>
+								<li class="color-preview" value="Dark Chocolate" style="background-color:#382d21;"></li>
+								<li class="color-preview" value="Citrus Yellow" style="background-color:#faef93;"></li>
+								<li class="color-preview"value="Avocado" style="background-color:#aeba5e;"></li>
+								<li class="color-preview" value="Kiwi" style="background-color:#8aa140;"></li>
+								<li class="color-preview" value="Irish Green" style="background-color:#1f6522;"></li>
+								<li class="color-preview"value="Scrub Green" style="background-color:#13afa2;"></li>
+								<li class="color-preview" value="Teal Ice" style="background-color:#b8d5d7;"></li>
+								<li class="color-preview"value="Heather Sapphire" style="background-color:#15aeda;"></li>
+								<li class="color-preview" value="Sky" style="background-color:#a5def8;"></li>
+								<li class="color-preview" value="Antique Sapphire" style="background-color:#0f77c0;"></li>
+								<li class="color-preview" value="Heather Navy" style="background-color:#3469b7;"></li>							
+								<li class="color-preview" value="Cherry Red" style="background-color:#c50404;"></li>
 							</ul>
 						</div>			      
 				     </div>				   
@@ -219,33 +219,33 @@
 			      <p>
 			      	<table class="table">
 			      		<tr>
-			      			<td><input type="checkbox">&emsp;S</td>
+			      			<td><input type="checkbox"id="S" name="S">&emsp;S</td>
 			      			<td align="right"><input min="0" style="width: 40px;" value="1" type="number"></td>
 			      		</tr>
 			      		<tr>
-			      			<td><input type="checkbox">&emsp;M</td>
+			      			<td><input type="checkbox" id="M" name="M">&emsp;M</td>
 			      			<td align="right"><input min="0" style="width: 40px;" placeholder="1" type="number"></td>
 			      		</tr>
 			      		<tr>
-			      			<td><input type="checkbox">&emsp;L</td>
+			      			<td><input type="checkbox" id="L" name="L">&emsp;L</td>
 			      			<td align="right"><input min="0" style="width: 40px;"  placeholder="1" type="number"></td>
 			      		</tr>
 			      		<tr>
-			      			<td><input type="checkbox">&emsp;XL</td>
+			      			<td><input type="checkbox"id="XL" name="XL">&emsp;XL</td>
 			      			<td align="right"><input min="0" style="width: 40px;"  placeholder="1" type="number"></td>
 			      		</tr>
                         <tr>
-			      			<td><input type="checkbox">&emsp;XXL</td>
+			      			<td><input type="checkbox" id="XXL" name="XXL">&emsp;XXL</td>
 			      			<td align="right"><input min="0" style="width: 40px;"  placeholder="1" type="number"></td>
 			      		</tr>
 			      	</table>			
 			      </p>
-					<button type="button" class="btn btn-large btn-block btn-success" name="addToTheBag" id="addToTheBag">Add to bag <i class="icon-briefcase icon-white"></i></button>
-
-					<input type="submit" name="cancel" value="Cancel" onClick="document.location.href='../my_account.php';"class="btn btn-danger btn-block" />
+					<button type="submit" class="btn btn-large btn-block btn-success" name="addBag" id="addBag">Add to bag <i class="icon-briefcase icon-white"></i></button>
+					<div><input type="cancel" name="cancel" value="Cancel" onClick="document.location.href='../my_account.php';"class="btn btn-danger btn-block" /></div>
+					
 		      </div>		      		       		   
 		    </div>
-		
+		</form>
 		  </div>
 		
 		</section>

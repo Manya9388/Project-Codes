@@ -167,7 +167,7 @@ else{
                         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
                             <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
                             <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Customized Orders</a>
-                            <!--<a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Payment Method</a>-->
+                            <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Order History</a>
                             <a class="nav-link" href="old/index.html"><i class="fa fa-sign-out-alt"></i>Customize T-Shirt</a>
                             <a class="nav-link" id="account-nav" data-toggle="pill" href="#customize-tab" role="tab"><i class="fa fa-user"></i>Customize Garments</a>
                             <a class="nav-link" href="logout.php"><i class="fa fa-sign-out-alt"></i>Logout</a>
@@ -228,28 +228,23 @@ while($row=mysqli_fetch_array($query))
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
-                                <h4>Payment Method</h4>
-                                <p>
-                                    
-                                </p> 
-                            </div>
-                            <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="address-nav">
-                                <h4>Payment</h4>
-                                <div class="row">
-                                    <!--<div class="col-md-6">
-                                        <h5>Payment Address</h5>
-                                        <p>123 Payment Street, Los Angeles, CA</p>
-                                        <p>Mobile: 012-345-6789</p>
-                                        <button class="btn">Edit Address</button>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h5>Shipping Address</h5>
-                                        <p>123 Shipping Street, Los Angeles, CA</p>
-                                        <p>Mobile: 012-345-6789</p>
-                                        <button class="btn">Edit Address</button>
-                                    </div>-->
+                                <h4>Order History</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Product Name</th>
+                                                <th>Amount</th>
+                                                <th>Order Date</th>
+                                                <th>Arrival Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                </table>
                                 </div>
                             </div>
+                            
                             <div class="tab-pane fade" id="customize-tab" role="tabpanel" aria-labelledby="account-nav">
                                 <h1> Customize </h1>
                                 <h6><i><b>Hello! What can we stitch for you ?</b></i></h6>
