@@ -226,23 +226,42 @@ else{
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>No</th>
-                                                <th>Product</th>
-                                                <th>Date</th>
-                                                <th>Price</th>
+                                                <th>Type</th>
+                                                <th>Size</th>
+                                                <th>IMage</th>
                                                 <th>Status</th>
-                                                <th>Action</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
-                                         <!--   <tr>
-                                                <td>3</td>
-                                                <td>Product Name</td>
-                                                <td>01 Jan 2020</td>
-                                                <td>$99</td>
-                                                <td>Approved</td>
-                                                <td><button class="btn">View</button></td>
-                                            </tr>-->
+                                        <?php
+              include 'config.php';
+             $query=mysqli_query($conn,"SELECT * from tbl_torder");
+             
+$cnt=1;
+while($row=mysqli_fetch_array($query))
+{
+  
+?>                                  
+             <tr>
+                 <td><?php echo htmlentities($cnt);?></td>
+                 <td><?php echo htmlentities($row['type']);?></td>
+                 <td><?php echo htmlentities($row['size']);?> </td>
+                 <?php echo  '<td> <img height="250" width="250" src="shopping/timages/'.$row['timg'].'"> </td>'; ?>
+                 
+                
+              <td>
+              <?php
+                   if($row['status']==1){
+                       echo '<p><a href="toinactivate.php?id='.$row['to_id'].'$status=1">APPROVE</a></p>';
+                   }else{
+                       echo '<p><a href="toactivate.php?id='.$row['to_id'].'$status=0">REJECT</a></p>';
+                   }
+                   ?>
+             
+             </tr>
+             <?php $cnt=$cnt+1; } ?>
+             
                                         </tbody>
                                     </table>
                                 </div>

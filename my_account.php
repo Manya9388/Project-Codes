@@ -168,7 +168,7 @@ else{
                             <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
                             <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Customized Orders</a>
                             <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Order History</a>
-                            <a class="nav-link" href="old/index.html"><i class="fa fa-sign-out-alt"></i>Customize T-Shirt</a>
+                            <a class="nav-link" href="old/index.php"><i class="fa fa-sign-out-alt"></i>Customize T-Shirt</a>
                             <a class="nav-link" id="account-nav" data-toggle="pill" href="#customize-tab" role="tab"><i class="fa fa-user"></i>Customize Garments</a>
                             <a class="nav-link" href="logout.php"><i class="fa fa-sign-out-alt"></i>Logout</a>
                         </div>

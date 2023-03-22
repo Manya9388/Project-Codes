@@ -72,7 +72,7 @@
 
   <!-- Navbar
     ================================================== -->
-	<form method="POST"action="tshirtaction.php">
+	<form method="POST" action="../shopping/torder.php" enctype="multipart/form-data">
     <div class="container">
 		<section id="typography">
 		  <div class="page-header">
@@ -93,11 +93,11 @@
 				     	<div class="well">
 <!--					      	<h3>Tee Styles</h3>-->
 <!--						      <p>-->
-						      	<select id="tshirttype" >                        
-				                    <option value="img/crew_front.png" selected="selected">Short Sleeve Shirts</option>
-				                    <option value="img/mens_longsleeve_front.png">Long Sleeve Shirts</option>                                        
-				                    <option value="img/mens_hoodie_front.png">Hoodies</option>                    
-				                    <option value="img/mens_tank_front.png">Tank tops</option>
+						      	<select id="tshirttype" name="type" >                        
+				                    <option  value="img/crew_front.png" selected="selected">Short Sleeve Shirts</option>
+				                    <option  value="img/mens_longsleeve_front.png">Long Sleeve Shirts</option>                                        
+				                    <option  value="img/mens_hoodie_front.png">Hoodies</option>                    
+				                    <option  value="img/mens_tank_front.png">Tank tops</option>
 								</select>	
 <!--						      </p>-->								
 					      </div>
@@ -215,36 +215,38 @@
 		
 		    <div class="span3">
 		      <div class="well">
-		      	<h3>Select Sizes</h3>
-			      <p>
-			      	<table class="table">
-			      		<tr>
-			      			<td><input type="checkbox"id="S" name="S">&emsp;S</td>
-			      			<td align="right"><input min="0" style="width: 40px;" value="1" type="number"></td>
-			      		</tr>
-			      		<tr>
-			      			<td><input type="checkbox" id="M" name="M">&emsp;M</td>
-			      			<td align="right"><input min="0" style="width: 40px;" placeholder="1" type="number"></td>
-			      		</tr>
-			      		<tr>
-			      			<td><input type="checkbox" id="L" name="L">&emsp;L</td>
-			      			<td align="right"><input min="0" style="width: 40px;"  placeholder="1" type="number"></td>
-			      		</tr>
-			      		<tr>
-			      			<td><input type="checkbox"id="XL" name="XL">&emsp;XL</td>
-			      			<td align="right"><input min="0" style="width: 40px;"  placeholder="1" type="number"></td>
-			      		</tr>
-                        <tr>
-			      			<td><input type="checkbox" id="XXL" name="XXL">&emsp;XXL</td>
-			      			<td align="right"><input min="0" style="width: 40px;"  placeholder="1" type="number"></td>
-			      		</tr>
-			      	</table>			
-			      </p>
-					<button type="submit" class="btn btn-large btn-block btn-success" name="addBag" id="addBag">Add to bag <i class="icon-briefcase icon-white"></i></button>
-					<div><input type="cancel" name="cancel" value="Cancel" onClick="document.location.href='../my_account.php';"class="btn btn-danger btn-block" /></div>
+			  <h3>DESIGN</h3>
+			     
 					
-		      </div>		      		       		   
+					<p><b> &nbsp;&nbsp;&nbsp;Design Your Tshirts and Upload</b></p>
+					<div><input type="cancel" name="cancel" value="Preview & Download" onClick="document.location.href='preview.php';"class="btn btn-danger btn-block" /></div>
+					<div><input type="cancel" name="cancel" value="Cancel" onClick="document.location.href='../my_account.php';"class="btn btn-danger btn-block" /></div>
+				</div>		      		       		   
 		    </div>
+
+			<div class="span3">
+		      <div class="well">
+		      	<h3>UPLOAD</h3>
+			      <p>
+				  <div class="col-md-3 form-group">
+                                    
+									<label for="measure">Size </label>
+									<select class="form-control m-bot15" name="size">
+									<option>---Select---</option>
+								<option>S</option>
+								<option>M</option>
+								<option>L</option>
+								<option>XL</option>
+								<option>XXL</option>
+								</select>
+								</div>
+								<div class="form-group">           
+                                            <label for="image">Product image</label>
+                                            <input type="file" class="form-control" accept="image/gif, image/jpeg, image/png, image/jpg"  name="timg" id="image">
+                                        </div>
+								<div><input type="submit" name="upload" value="Upload" onClick="document.location.href='../shopping/torder.php';"class="btn btn-large btn-block btn-success" /></div>
+	</div>
+	</div>
 		</form>
 		  </div>
 		
