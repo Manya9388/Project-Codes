@@ -226,11 +226,11 @@ else{
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>No</th>
-                                                <th>Type</th>
+                                               <!-- <th>Type</th>-->
                                                 <th>Size</th>
                                                 <th>IMage</th>
                                                 <th>Status</th>
-                                                
+                                                <th>Add Price</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -245,7 +245,7 @@ while($row=mysqli_fetch_array($query))
 ?>                                  
              <tr>
                  <td><?php echo htmlentities($cnt);?></td>
-                 <td><?php echo htmlentities($row['type']);?></td>
+               <!--  <td><?php echo htmlentities($row['type']);?></td>-->
                  <td><?php echo htmlentities($row['size']);?> </td>
                  <?php echo  '<td> <img height="250" width="250" src="shopping/timages/'.$row['timg'].'"> </td>'; ?>
                  
@@ -258,6 +258,7 @@ while($row=mysqli_fetch_array($query))
                        echo '<p><a href="toactivate.php?id='.$row['to_id'].'$status=0">REJECT</a></p>';
                    }
                    ?>
+                    <td><a href="tprice.php?to_id=<?php echo $row['to_id']?>">Add Price</a></td>
              
              </tr>
              <?php $cnt=$cnt+1; } ?>

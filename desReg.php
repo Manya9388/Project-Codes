@@ -10,27 +10,67 @@ $address = $_POST['address'];
 $city = $_POST['city'];
 $email = $_POST['email'];
 $password = $_POST['password'];
+$sql="select * from tbl_login where (email='$email' AND password='$password');";
 
- $sql1 = "INSERT INTO tbl_designerreg (fname,lname,phone,address,city) VALUES ('$fname','$lname','$phone','$address','$city')";
- $sql2 = "INSERT INTO tbl_login (email,password,role) VALUES ('$email','$password','designer')";
- if(mysqli_query($conn, $sql1)){
-    echo "Records added successfully.";
-  } 
-else{
-    echo "ERROR: Could not able to execute $sql1. " . mysqli_error($conn);
-  }
-  
-  $sql2 = "INSERT INTO tbl_login (email,password) VALUES ('$email','$password')";
+      $res=mysqli_query($conn,$sql);
+
+      if (mysqli_num_rows($res) > 0) {
+        
+        $row = mysqli_fetch_assoc($res);
+        if($password==isset($row['password']) || ($email==isset($row['email'])))
+        {
+            $_SESSION['status'] = "You already have an account.Login to continue";
+            echo "Already Registered";
+            
+        }
+	
+		}
+    else{
+ 
+// $sql2 = "INSERT INTO tbl_login (email,password,role,status) VALUES ('$email','$password','user',0)";
+ 
+$sql2 = "INSERT INTO tbl_login (email,password,role,status) VALUES ('$email','$password','designer',0)";
 if(mysqli_query($conn, $sql2)){
-  echo "Records added successfully.";
-  header('LOCATION:login.html');
+echo "Records added successfully.";
+header('LOCATION:login.html');
 } else{
-  echo "ERROR: Could not able to execute $sql2. " . mysqli_error($conn);
+echo "ERROR: Could not able to execute $sql2. " . mysqli_error($conn);
+}
+$sql3=mysqli_query($conn,"SELECT log_id from tbl_login where email='$email'");
+while($row=mysqli_fetch_array($sql3))
+{
+  $a=$row['log_id'];
+$sql1 = mysqli_query($conn,"INSERT INTO tbl_designerreg (fname,lname,phone,address,city,log_id) VALUES ('$fname','$lname','$phone','$address','$city','$a')");
+}
+ if(mysqli_query($conn, $sql1)){
+  echo "Records added successfully.";
+} 
+else{
+  echo "ERROR: Could not able to execute $sql1. " . mysqli_error($conn);
+}
+
 }
 }
+
 
 
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

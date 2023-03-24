@@ -169,6 +169,7 @@ else{
                             <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Customized Orders</a>
                             <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Order History</a>
                             <a class="nav-link" href="old/index.php"><i class="fa fa-sign-out-alt"></i>Customize T-Shirt</a>
+                            <a class="nav-link" id="torders-nav" data-toggle="pill" href="#torders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Approved T-Shirt</a>
                             <a class="nav-link" id="account-nav" data-toggle="pill" href="#customize-tab" role="tab"><i class="fa fa-user"></i>Customize Garments</a>
                             <a class="nav-link" href="logout.php"><i class="fa fa-sign-out-alt"></i>Logout</a>
                         </div>
@@ -221,6 +222,44 @@ while($row=mysqli_fetch_array($query))
 									  echo "<td>Rejected</td>";
 									}
                ?>
+              </tr>  
+                                        </tbody>
+                                        <?php $cnt=$cnt+1; } ?>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="torders-tab" role="tabpanel" aria-labelledby="torders-nav">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Product</th>
+                                                <th>Price</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <?php
+             // include('config.php');
+             $sql31=mysqli_query($conn,"SELECT log_id from tbl_login where email='$e'");
+                                while($row=mysqli_fetch_array($sql31))
+                                {
+                                  $a=$row['log_id'];
+                                }
+              $query=mysqli_query($conn,"SELECT * from tbl_torder where log_id='$a' AND status=0");
+              
+$cnt=1;
+while($row=mysqli_fetch_array($query))
+{
+?>               
+                                        <tbody>
+                                        <tr>
+                  <td><?php echo htmlentities($cnt);?></td>
+                  <?php echo  '<td> <img height="250" width="250" src="shopping/timages/'.$row['timg'].'"> </td>'; ?>
+                  <td><?php echo htmlentities($row['price']);?></td>
+                  <td><a href="#?to_id=<?php echo $row['to_id']?>">PAY NOW</a></td>
+             
               </tr>  
                                         </tbody>
                                         <?php $cnt=$cnt+1; } ?>

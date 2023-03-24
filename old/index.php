@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -130,7 +131,7 @@
 				    <div class="tab-pane" id="tab2">
 				    	<div class="well">
 				    		<div class="input-append">
-							  <input class="span2" id="text-string" type="text" placeholder="add text here..."><button id="add-text" class="btn" title="Add text"><i class="icon-share-alt"></i></button>
+							 <input class="span2" id="text-string" type="text" placeholder="add text here..."><button id="add-text" class="btn" title="Add text"><i class="icon-share-alt"></i></button>
 							  <hr>
 							</div>
 							<div id="avatarlist">
@@ -143,10 +144,10 @@
 							</div>	
                             <div>
                                 <hr>
-							     <form action="" method="post" enctype="multipart/form-data">
+							    <!-- <form action="" method="post" enctype="multipart/form-data">
                                      <input type="file" name="img" id="fileToUpload">
                                      <input class="btn btn-primary" type="submit" value="Upload Custom Image" name="submit">
-                                </form>
+                                </form>-->
 							  
 							</div>
                             

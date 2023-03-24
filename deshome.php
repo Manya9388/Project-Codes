@@ -1,11 +1,15 @@
 <?php
+include('config.php');
+
 session_start();
 if($_SESSION['email']){
-    echo "Welcome Designer";
+    $e=$_SESSION['email'];
 }
 else{
     header("location:index.php");
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,16 +76,30 @@ else{
                                 </div>
                             </div>
                         </div>
+                        <?php
+                                $sql3=mysqli_query($conn,"SELECT log_id from tbl_login where email='$e'");
+                                while($row=mysqli_fetch_array($sql3))
+                                {
+                                  $a=$row['log_id'];
+                                }
+                                $sql4=mysqli_query($conn,"SELECT r.fname from tbl_designerreg r join tbl_login l on r.log_id= l.log_id where r.log_id='$a' ");
+                                while($row=mysqli_fetch_array($sql4))
+                                {
+                                  $b=$row['fname'];
+                                ?>
                         <div class="navbar-nav ml-auto">
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Designer Account</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><?php echo $row['fname']; ?></a>
+                                <?php
+                            }
+                            ?>
                                 <div class="dropdown-menu">
                                     <a href="#" class="dropdown-item">Account</a>
                                     <a href="#" class="dropdown-item">Update</a>
                                     <a href="changep.html" class="dropdown-item">Change Password</a>
                                 </div>
                             </div>
-                        </div>
+                        </div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
                     </div>
                 </nav>
             </div>
