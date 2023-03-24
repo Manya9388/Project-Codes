@@ -1,4 +1,4 @@
-<?php
+<?php phpinfo();
 if (extension_loaded('gd')) {
     echo "GD extension is loaded";
 } else {

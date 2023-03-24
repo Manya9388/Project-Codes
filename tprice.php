@@ -11,7 +11,7 @@
                 if($update){
                     echo "<script>
                     alert('Price Added.');
-                        window.href=location='my_account.php';
+                        window.href=location='adminhome.php';
                     </script>";      
                 }}?>
 

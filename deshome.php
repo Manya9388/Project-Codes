@@ -186,7 +186,7 @@ else{
                                             </tr>
                                         </thead>
                                         <?php
-              include('config.php');
+             // include('config.php');
               $query=mysqli_query($conn,"select * from tbl_customize");
               
 $cnt=1;
