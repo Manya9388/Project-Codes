@@ -1,11 +1,17 @@
 <?php
 include('config.php');
+session_start();
+$email=$_SESSION['email'];
 $targetDir="fimages/";
 //$targetDir2="mimages/";
 
 if(isset($_POST["submit"]))
 {
-
+  $sql3=mysqli_query($conn,"SELECT log_id from tbl_login where email='$email'");
+  while($row=mysqli_fetch_array($sql3))
+  {
+    $log_id=$row['log_id'];
+  }
     $type=$_POST['type'];
     $cust_id=$_POST['cust_id'];
     $des_id=$_POST['des_id'];
@@ -27,7 +33,7 @@ if(isset($_POST["submit"]))
     move_uploaded_file($_FILES["img1"]["tmp_name"],$targetFilePath);
    // move_uploaded_file($_FILES["img2"]["tmp_name"],$targetFilePath2);
 
-    $sql=mysqli_query($conn,"INSERT INTO tbl_customize(type,cust_id,des_id,fabric,front,sleeves,colour,specify,size,img1,price,duration) VALUES('$type','$cust_id','$des_id','$fabric','$front','$sleeves','$colour','$specify','$size','$img1','$price','$duration')");
+    $sql=mysqli_query($conn,"INSERT INTO tbl_customize(type,log_id,des_id,fabric,front,sleeves,colour,specify,size,img1,price,duration) VALUES('$type','$log_id','$des_id','$fabric','$front','$sleeves','$colour','$specify','$size','$img1','$price','$duration')");
 
     if($sql)
       {

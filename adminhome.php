@@ -133,7 +133,7 @@ else{
                     <div class="col-md-3">
                         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
                             <a class="nav-link active" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-cart"></i>Orders</a>
-                            <a class="nav-link " id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Tshirts</a>
+                           <!-- <a class="nav-link " id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Tshirts</a>-->
                             <a class="nav-link" id="payment-nav" data-toggle="pill" href="#category-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Category</a>
                             <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Products</a>
                             <a class="nav-link" id="account-nav" data-toggle="pill" href="#subc-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Subcategory</a>
@@ -143,7 +143,7 @@ else{
                     <div class="col-md-9">
                         <div class="tab-content">
                             <div class="tab-pane fade" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
-                            <html>
+                           <!-- <html>
                                     <form role="form" action="actiontshirt.php" method="post" >
                                         
                                     <div class="panel-body">
@@ -217,7 +217,7 @@ else{
                                     </form>
                        
                                     
-                                    </html> 
+                                    </html> -->
                               
                             </div>
                             <div class="tab-pane fade show active" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
@@ -228,8 +228,9 @@ else{
                                                 <th>No</th>
                                                <!-- <th>Type</th>-->
                                                 <th>Size</th>
-                                                <th>IMage</th>
-                                                <th>Status</th>
+                                                <th>Image</th>
+                                                <th>Approve</th>
+                                                <th>Reject</th>
                                                 <th>Add Price</th>
                                             </tr>
                                         </thead>
@@ -249,15 +250,30 @@ while($row=mysqli_fetch_array($query))
                  <td><?php echo htmlentities($row['size']);?> </td>
                  <?php echo  '<td> <img height="250" width="250" src="shopping/timages/'.$row['timg'].'"> </td>'; ?>
                  
-                
-              <td>
+                 <td>
+              
               <?php
-                   if($row['status']==1){
-                       echo '<p><a href="toinactivate.php?id='.$row['to_id'].'$status=1">APPROVE</a></p>';
-                   }else{
-                       echo '<p><a href="toactivate.php?id='.$row['to_id'].'$status=0">REJECT</a></p>';
-                   }
-                   ?>
+                        if($row['status']==1){
+                          echo '<p><b><a href="topending.php?id='.$row['to_id'].'$status=0"style="color:Green;font-size:17px;">Approve</a></b></p>';
+                        }else{
+                          echo '<p><b><a href="topending.php?id='.$row['to_id'].'$status=0"style="color:Green;font-size:17px;">Approve</a></b></p>';
+                        }
+                        ?>
+             </td>
+
+             <td>
+              
+              <?php
+                        if($row['status']==0){
+                          echo '<p><b><a href="toreject.php?id='.$row['to_id'].'$status=1"style="color:red;font-size:17px;">Reject</a></b></p>';
+                        }else{
+                          echo '<p><b><a href="toreject.php?id='.$row['to_id'].'$status=1"style="color:red;font-size:17px;">Reject</a></b></p>';
+                        }
+                        ?>
+             </td>
+              
+
+                   
                     <td><a href="tprice.php?to_id=<?php echo $row['to_id']?>">Add Price</a></td>
              
              </tr>
@@ -375,7 +391,7 @@ while($row=mysqli_fetch_array($query))
           
               
               <?php
-              include 'config.php';
+              //include 'config.php';
               $query=mysqli_query($conn,"select * from tbl_category");
               
 $cnt=1;

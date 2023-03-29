@@ -262,7 +262,7 @@ tr{
 												
 											</div>
 											<br>
-											
+											<?php  $_SESSION['all_total']="$all_total". ".00"; ?>
 											<a href="checkout.php"class="btn btn-primary btn-block" >Shipping Details</button></a>
 											<!-- <a href="deliveryform.php" button class="btn btn-primary btn-block">Cash On Delivery</button></a> -->
 											<br><br>

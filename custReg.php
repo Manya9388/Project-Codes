@@ -44,6 +44,7 @@ while($row=mysqli_fetch_array($sql3))
 {
   $a=$row['log_id'];
 $sql1 = mysqli_query($conn,"INSERT INTO tbl_customerreg (fname,lname,phone,address,city,region,pincode,district,log_id) VALUES ('$fname','$lname','$phone','$address','$city','$region','$pincode','$district','$a')");
+$sql5=mysqli_query($conn,"INSERT INTO tbl_oaddress(log_id,fname,lname,phone,address,city,region,pincode,district,status) VALUES('$a','$fname','$lname','$phone','$address','$city','$region','$pincode','$district',0)");
 }
  if(mysqli_query($conn, $sql1)){
   echo "Records added successfully.";

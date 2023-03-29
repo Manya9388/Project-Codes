@@ -33,7 +33,7 @@
         <div class="user-details">
           <div class="input-box">
             <span class="details">First Name</span>
-            <input type="text" name="fname" id="username" placeholder="Enter your first name" onkeyup="white(this.value)" required onchange="Validstr();"/>
+            <input type="text" autocomplete="off" name="fname" id="username" placeholder="Enter your first name" onkeyup="white(this.value)" required onchange="Validstr();"/>
             <div class="error"></div>
           </div>
           <span id="msg1" style="color:red;"></span>
@@ -53,12 +53,12 @@
                    </script>
           <div class="input-box">
             <span class="details">Last Name</span>
-            <input type="text" name="lname"id="lname" placeholder="Enter your last name" required> 
+            <input type="text" autocomplete="off" name="lname"id="lname" placeholder="Enter your last name" required> 
             <div class="error"></div>
           </div>
           <div class="input-box">
             <span class="details">Phone No</span>
-            <input type="text" name="phone"id="phone" placeholder="Enter your phone number" required onchange="Validphone()";/>
+            <input type="text" autocomplete="off" name="phone"id="phone" placeholder="Enter your phone number" required onchange="Validphone()";/>
             <div class="error"></div>
           </div>
           <span id="msg2" style="color:red;"></span>
@@ -78,17 +78,17 @@
                        </script>
           <div class="input-box">
             <span class="details">Address</span>
-            <input type="text" name="address"id="address" placeholder="Enter your address" required>
+            <input type="text" autocomplete="off" name="address"id="address" placeholder="Enter your address" required>
             <div class="error"></div>
           </div>
           <div class="input-box">
             <span class="details">City</span>
-            <input type="text" name="city" id="city" placeholder="Enter your city" required>
+            <input type="text" autocomplete="off" name="city" id="city" placeholder="Enter your city" required>
             <div class="error"></div>
           </div>
           <div class="input-box">
             <span class="details">Email</span>
-            <input type="email" name="email" id="email" placeholder="Enter your email" required onsubmit="return validateemail();"/>
+            <input type="email" autocomplete="off" name="email" id="email" placeholder="Enter your email" required onsubmit="return validateemail();"/>
             <div class="error"></div>
           </div>
           
@@ -106,26 +106,26 @@
             </script> 
           <div class="input-box">
             <span class="details">Region</span>
-            <input type="text" name="region" id="region" placeholder="enter your region" required>
+            <input type="text" autocomplete="off" name="region" id="region" placeholder="enter your region" required>
             <div class="error"></div>
           </div>
           <div class="input-box">
             <span class="details">District</span>
-            <input type="text" name="district" id="district" placeholder="enter your district" required>
+            <input type="text" autocomplete="off" name="district" id="district" placeholder="enter your district" required>
             <div class="error"></div>
           </div>
           <div class="input-box">
             <span class="details">Pincode</span>
-            <input type="text" name="pincode" id="pincode" placeholder="enter your pincode" required>
+            <input type="text" autocomplete="off" name="pincode" id="pincode" placeholder="enter your pincode" required>
             <div class="error"></div>
           </div>
           <div class="input-box">
             <span class="details">Password</span>
-            <input type="password" name="password" id="password" placeholder="enter your password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/>
+            <input type="password" autocomplete="off" name="password" id="password" placeholder="enter your password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/>
           </div>
           <div class="input-box">
             <span class="details">Confirm Password</span>
-            <input type="password" name="cpassword" id="cpassword" placeholder="Confirm your password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Should be same as password"/>
+            <input type="password" autocomplete="off" name="cpassword" id="cpassword" placeholder="Confirm your password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Should be same as password"/>
             <div class="error"></div>
           </div>
         </div>

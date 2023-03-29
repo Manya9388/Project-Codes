@@ -104,7 +104,7 @@
 
             
            
-            $addtocart_res= mysqli_query($conn,"INSERT INTO tbl_wishlist VALUES(null,$product_id,0,1)");
+            $addtocart_res= mysqli_query($conn,"INSERT INTO tbl_wishlist VALUES(null,$product_id,$log_id,1)");
             if(mysqli_insert_id($conn) >= 0){
                 echo "<script>
                     alert('Product added to wishlist successfully.');

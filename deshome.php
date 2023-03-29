@@ -187,7 +187,7 @@ else{
                                         </thead>
                                         <?php
              // include('config.php');
-              $query=mysqli_query($conn,"select * from tbl_customize");
+              $query=mysqli_query($conn,"SELECT * FROM `tbl_customize` WHERE des_id in(SELECT des_id from tbl_designerreg where log_id = '$a'); ");
               
 $cnt=1;
 while($row=mysqli_fetch_array($query))

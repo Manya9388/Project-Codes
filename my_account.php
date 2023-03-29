@@ -145,11 +145,56 @@ else{
                             <a href="shopping/viewwish.php" class="btn wishlist">
                                 <i class="fa fa-heart"></i>
                                 <span></span>
+                               <?php
+                               $sql35=mysqli_query($conn,"SELECT log_id from tbl_login where email='$e'");
+                               while($row=mysqli_fetch_array($sql3))
+                               {
+                                 $a=$row['log_id'];
+                               } $sql67 = "SELECT COUNT(*) AS count FROM tbl_wishlist where status=1 and log_id='$a'";
+    $result = mysqli_query($conn, $sql67);
+    $row = mysqli_fetch_assoc($result);
+    $count = $row['count'];
+
+    if ($count > 0) {
+        echo '<span class="count">' . $count . '</span>';
+    }?>
                             </a>
                             <a href="shopping/my-cart.php" class="btn cart">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span></span>
+                              <?php 
+                                $sql35=mysqli_query($conn,"SELECT log_id from tbl_login where email='$e'");
+                                while($row=mysqli_fetch_array($sql3))
+                                {
+                                  $a=$row['log_id'];
+                                } $sql66 = "SELECT COUNT(*) AS count FROM tbl_cart where log_id='$a'";
+    $result = mysqli_query($conn, $sql66);
+    $row = mysqli_fetch_assoc($result);
+    $count = $row['count'];
+
+    if ($count > 0) {
+        echo '<span class="count">' . $count . '</span>';
+    }?>
                             </a>
+
+                            <a onClick='myFunction()' class="btn cart">
+                            <i style="font-size:20px" class="fa">&#xf0f3;</i>
+                                <span></span>
+                               <?php
+                               $sql35=mysqli_query($conn,"SELECT log_id from tbl_login where email='$e'");
+                               while($row=mysqli_fetch_array($sql3))
+                               {
+                                 $a=$row['log_id'];
+                               }
+                                $sql = "SELECT COUNT(*) AS count FROM tbl_customize where status != 0 and log_id='$a'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $count = $row['count'];
+
+    if ($count > 0) {
+        echo '<span class="count">' . $count . '</span>';
+    }
+        ?>                    </a>
                         </div>
                     </div>
                 </div>
@@ -197,7 +242,12 @@ else{
                                         </thead>
                                         <?php
              // include('config.php');
-              $query=mysqli_query($conn,"SELECT tbl_customize.type,tbl_customize.status,tbl_designerreg.phone from tbl_customize join tbl_designerreg on tbl_customize.des_id=tbl_designerreg.des_id");
+             $sql35=mysqli_query($conn,"SELECT log_id from tbl_login where email='$e'");
+             while($row=mysqli_fetch_array($sql35))
+             {
+               $a=$row['log_id'];
+             }
+              $query=mysqli_query($conn,"SELECT tbl_customize.type,tbl_customize.status,tbl_designerreg.phone from tbl_customize join tbl_designerreg on tbl_customize.des_id=tbl_designerreg.des_id AND tbl_customize.log_id='$a'");
               
 $cnt=1;
 while($row=mysqli_fetch_array($query))
@@ -247,7 +297,7 @@ while($row=mysqli_fetch_array($query))
                                 {
                                   $a=$row['log_id'];
                                 }
-              $query=mysqli_query($conn,"SELECT * from tbl_torder where log_id='$a' AND status=0");
+              $query=mysqli_query($conn,"SELECT * from tbl_torder where log_id='$a'");
               
 $cnt=1;
 while($row=mysqli_fetch_array($query))
@@ -258,7 +308,17 @@ while($row=mysqli_fetch_array($query))
                   <td><?php echo htmlentities($cnt);?></td>
                   <?php echo  '<td> <img height="250" width="250" src="shopping/timages/'.$row['timg'].'"> </td>'; ?>
                   <td><?php echo htmlentities($row['price']);?></td>
-                  <td><a href="#?to_id=<?php echo $row['to_id']?>">PAY NOW</a></td>
+                     <?php
+               if($row['status'] ==2){
+									  echo "<td>Product Available</td>";
+									}
+									else if($row['status'] ==0){
+									  echo "<td>Pending</td>";
+									}
+									else if($row['status'] == -1){
+									  echo "<td>Rejected</td>";
+									}
+               ?>
              
               </tr>  
                                         </tbody>
@@ -437,5 +497,10 @@ while($row=mysqli_fetch_array($query))
         
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script>
+function myFunction() {
+  alert("The Customized T-shirt is Now Available!! You can purchase it.");
+}
+</script>
     </body>
 </html>

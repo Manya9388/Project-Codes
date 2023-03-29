@@ -20,7 +20,7 @@ while($row = mysqli_fetch_array($sql)){
     
     if($result){
         $pay_id = $conn->insert_id;
-        $sql4 = "INSERT INTO tbl_order (pay_id,status) VALUES ( '$pay_id','0')";
+        $sql4 = "INSERT INTO tbl_order (pay_id,status) VALUES ( '$pay_id',0)";
         $result = $conn->query($sql4);
         
         if($result){
