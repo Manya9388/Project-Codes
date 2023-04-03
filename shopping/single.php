@@ -193,9 +193,7 @@ while ($row=mysqli_fetch_array($ret))
 				
 				</div>
 			</div>
-						<p class="my-sm-4 my-3">
-							<i class="fas fa-retweet mr-3"></i>Net banking & Credit/ Debit/ ATM card
-						</p>
+						
 					</div>
 					</div>                    
           <div><input type="submit" name="cancel" value="Cancel" onClick="document.location.href='category.php?pro';"class="btn btn-danger btn-block" />

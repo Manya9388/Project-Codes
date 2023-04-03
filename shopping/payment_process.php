@@ -25,7 +25,7 @@ while($row = mysqli_fetch_array($sql)){
         
         if($result){
             // Delete cart items that were added to the order
-            $sql5 = "UPDATE tbl_cart SET status='0' WHERE cart_id = '$cart_id'";
+            $sql5 = "UPDATE tbl_cart SET status='1' WHERE cart_id = '$cart_id'";
             $result2 = $conn->query($sql5);
         } 
     }

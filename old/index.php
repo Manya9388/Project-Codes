@@ -131,7 +131,7 @@
 				    <div class="tab-pane" id="tab2">
 				    	<div class="well">
 				    		<div class="input-append">
-							 <input class="span2" id="text-string" type="text" placeholder="add text here..."><button id="add-text" class="btn" title="Add text"><i class="icon-share-alt"></i></button>
+							 <!--<input class="span2" id="text-string" type="text" placeholder="add text here...">--><button id="add-text" class="btn" title="Add text"><!--<i class="icon-share-alt">--></i></button>
 							  <hr>
 							</div>
 							<div id="avatarlist">
@@ -187,11 +187,11 @@
 								  <!--- Background <input type="hidden" id="text-bgcolor" class="color-picker" size="7" value="#ffffff"> --->
 							</div>							  
 							<div class="pull-right" align="" id="imageeditor" style="display:none">
-							  <div class="btn-group">										      
-							      <button class="btn" id="bring-to-front" title="Bring to Front"><i class="icon-fast-backward rotate" style="height:19px;"></i></button>
-							      <button class="btn" id="send-to-back" title="Send to Back"><i class="icon-fast-forward rotate" style="height:19px;"></i></button>
-							      <button id="flip" type="button" class="btn" title="Show Back View"><i class="icon-retweet" style="height:19px;"></i></button>
-							      <button id="remove-selected" class="btn" title="Delete selected item"><i class="icon-trash" style="height:19px;"></i></button>
+							 <div class="btn-group">										      
+							      <button class="btn" id="bring-to-front" title="Bring to Front"><!--<i class="icon-fast-backward rotate" style="height:19px;"></i>--></button>
+							      <button class="btn" id="send-to-back" title="Send to Back"><!--<i class="icon-fast-forward rotate" style="height:19px;"></i>--></button>
+							      <button id="flip" type="button" class="btn" title="Show Back View"><!--<i class="icon-retweet" style="height:19px;"></i>--></button>
+							      <button id="remove-selected" class="btn" title="Delete selected item"><!--<i class="icon-trash" style="height:19px;"></i>--></button>
 							  </div>
 							</div>			  
 						</div>												

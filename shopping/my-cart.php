@@ -157,7 +157,7 @@ tr{
 										<tr>
 											<th scope="col">Sr.No.</th>
 											<th scope="col">Item Name</th>
-											<th scope="col">Image</th>
+											<!--<th scope="col">Image</th>-->
 											<th scope="col">Price</th>
 											<th scope="col">Quantity</th>
 											<th scope="col">Total</th>
@@ -185,7 +185,7 @@ tr{
 											while($row=mysqli_fetch_array($sql3))
 											{
 											  $a=$row['log_id'];
-											$mycart_record_res= mysqli_query($conn,"SELECT * from tbl_cart where log_id=$a ");
+											$mycart_record_res= mysqli_query($conn,"SELECT * from tbl_cart where log_id=$a AND status=0");
 											if(mysqli_num_rows($mycart_record_res) > 0)
 											{
 												foreach($mycart_record_res as $row){
@@ -208,7 +208,7 @@ tr{
 																
 																<td><p id='prod_name'>".$pred_details_res["product"]."</p></td>
 															
-															<td></td>
+															
 																<td>".$pred_details_res["price"]."</td>
 
 																

@@ -134,7 +134,7 @@
     <div class="form">
     <br><center> <div class="inputfield">
           <label>Product Price:</label>
-          <input type="number" step="0.00000001" min="100" class="input" name="price" placeholder="Price" required />
+          <input type="number" step="1" min="100" class="input" name="price" placeholder="Price" required />
          
        </div> </center>  
        <br> <center><div class="inputfield">

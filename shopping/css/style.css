@@ -132,7 +132,7 @@ a:active{
 }
 
 span.green{
-	color:#2ecc71;
+	color:#a34e12;
 }
 
 span.red, span.error{
@@ -739,7 +739,7 @@ span.nav-description{
 }
 
 #main-navigation li ul.normal-dropdown li{
-	background:#1abc9c;
+	background:#a34e12;
 	position:relative;
 	display:block;
 }
@@ -759,7 +759,7 @@ span.nav-description{
 }
 
 #main-navigation li ul.normal-dropdown li:hover>a{
-	background:#16a085;
+	background:#a34e12;
 }
 
 #main-navigation li ul.normal-dropdown li ul{
@@ -818,7 +818,7 @@ span.nav-description{
 }
 
 #main-navigation li.home-green>a, #main-navigation .home-green ul.wide-dropdown, #main-navigation li.home-green{
-	background:#1abc9c;
+	background:#a34e12;
 }
 
 #main-navigation li.red>a, #main-navigation .red ul.wide-dropdown, #main-navigation li.red{
@@ -862,7 +862,7 @@ span.nav-description{
 	-ms-transition: all 0.2s;
 	-o-transition: all 0.2s;
 	vertical-align:middle;
-	background:#1abc9c;
+	background:#a34e12;
 }
 
 #main-navigation .nav-search:hover{
@@ -970,7 +970,7 @@ span.nav-description{
 .style3 #search-bar p>a:hover,
 .style5 #search-bar p>a:hover,
 .style6 #search-bar p>a:hover{
-	color:#1abc9c;	
+	color:#a34e12;	
 }
 
 #search-bar-table{
@@ -1001,7 +1001,7 @@ span.nav-description{
 
 #search-button input[type="submit"]{
 	height:100%;
-	background:#1abc9c;
+	background:#a34e12;
 	transition: all 0.2s;
 	-webkit-transition: all 0.2s;
 	-moz-transition: all 0.2s;
@@ -1025,7 +1025,7 @@ span.nav-description{
 }
 
 #search-button:hover input[type="submit"]{
-	background:#16a085;
+	background:#a34e12;
 }
 
 #search-button .icons{
@@ -1046,7 +1046,7 @@ span.grey{
 }
 
 #search-bar p a:hover{
-	color:#1abc9c;	
+	color:#a34e12;	
 }
 
 

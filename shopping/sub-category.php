@@ -8,7 +8,7 @@ if(isset($_GET['action']) && $_GET['action']=="add"){
 	if(isset($_SESSION['cart'][$id])){
 		$_SESSION['cart'][$id]['quantity']++;
 	}else{
-		$sql_p="SELECT * FROM tbl_products WHERE product_id={$product_id}";
+		$sql_p="SELECT * FROM tbl_products WHERE product_id={$id}";
 		$query_p=mysqli_query($conn,$sql_p);
 		if(mysqli_num_rows($query_p)!=0){
 			$row_p=mysqli_fetch_array($query_p);
@@ -194,28 +194,26 @@ while ($row=mysqli_fetch_array($ret))
 			</div><!-- /.product-price -->
 			
 			</div><!-- /.product-info -->
-					<div class="cart clearfix animate-effect">
+			<div class="cart clearfix animate-effect">
 				<div class="action">
 					<ul class="list-unstyled">
+					<li>
+                            <input type="text" value="<?php echo $row['product_id']?>" name="product_id" hidden>
+                            <input type="text" value="<?php echo $_GET['sub_id']?>" name="sub_id" hidden>
+                            
+                        </li>
 						<li class="add-cart-button btn-group">
 						
 								<?php if($row['quantity'] > 0){?>
-										<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-								<i class="fa fa-shopping-cart"></i>													
-							</button>
-							<div class="action" style="color:red"><a href="./cart.php?product_id=<?php echo $row['product_id']?>">Add to cart</a></div>
-								<?php } else {?>
+									<button class="btn btn-primary icon" data-toggle="dropdown" type="button"><i class="fa fa-shopping-cart"></i></button>
+                                    <input class="btn btn-primary" type="submit" name="add_to_cart" value="Add to cart">
+									
+						<input class="btn btn-primary" type="submit" name="wishlist" value="Wishlist">
+									<?php } else {?>
 							<div class="action" style="color:red">Out of Stock</div>
 					<?php } ?>
 													
-						</li>
-	                   
-		                <li class="lnk wishlist">
-						<div class="action" style="color:red"><a href="../wishlist.php?product_id=<?php echo $row['product_id']?>">Wishlist</a></div>
-								 
-							</a>
-						</li>
-
+						
 						
 					</ul>
 				</div>

@@ -117,7 +117,7 @@ else{
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                   <!-- <div class="col-md-6">
                         <div class="search">
                             <input type="text" placeholder="Search">
                             <button><i class="fa fa-search"></i></button>
@@ -134,7 +134,7 @@ else{
                                 <span>(0)</span>
                             </a>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -150,9 +150,9 @@ else{
                         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
                             <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
                             <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Orders</a>
-                            <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Payment Method</a>
-                            <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-map-marker-alt"></i>address</a>
-                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#customize-tab" role="tab"><i class="fa fa-user"></i>Feedback</a>
+                            <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Confirmed Orders</a>
+                           <!-- <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-map-marker-alt"></i>address</a>
+                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#customize-tab" role="tab"><i class="fa fa-user"></i>Feedback</a>-->
                             <a class="nav-link" href="logout.php"><i class="fa fa-sign-out-alt"></i>Logout</a>
                         </div>
                     </div>
@@ -171,18 +171,17 @@ else{
                                             <tr>
                                             <th>SERIAL NO</th>
                                             <th>TYPE</th>
-                                            <th>FABRIC</th>
-                                            <th>FRONT</th>
-                                            <th>SLEEVES</th>
-                                            <th>COLOUR</th>
-                                            <th>SPECIFY</th>
+                                            <th>FABRIC & COLOUR</th>
+                                            <th>FRONT & SLEEVES</th>
+                                            <th>SPECIFY & DURATION</th>
                                             <th>SIZE</th>
-                                            <th>DURATION</th>
+                                           
                                             <th>PRICE</th>
                                             <!--<th>FABRIC</th>-->
                                             <th style="width:15px";>MODEL</th>
                                             <th>APPROVE</th>
                                             <th>REJECT</th>
+                                            <th>Action</th>
                                             </tr>
                                         </thead>
                                         <?php
@@ -198,13 +197,10 @@ while($row=mysqli_fetch_array($query))
                                         <tr>
                   <td><?php echo htmlentities($cnt);?></td>
                   <td><?php echo htmlentities($row['type']);?></td>
-                  <td><?php echo htmlentities($row['fabric']);?></td>
-                  <td><?php echo htmlentities($row['front']);?></td>
-                  <td><?php echo htmlentities($row['sleeves']);?></td>
-                  <td><?php echo htmlentities($row['colour']);?></td>
-                  <td><?php echo htmlentities($row['specify']);?></td>
+                  <td><?php echo htmlentities($row['fabric']);?><br><br><?php echo htmlentities($row['colour']);?></td>
+                  <td><?php echo htmlentities($row['front']);?><br><br><?php echo htmlentities($row['sleeves']);?></td>
+                  <td><?php echo htmlentities($row['specify']);?><br><br><?php echo htmlentities($row['duration']);?></td>
                   <td><?php echo htmlentities($row['size']);?></td>
-                  <td><?php echo htmlentities($row['duration']);?></td>
                   <td><?php echo htmlentities($row['price']);?></td> 
                  <?php echo  '<td> <img height="150" width="100" src="fimages/'.$row['img1'].'"> </td>'; ?>
                   <!--<td><?php echo htmlentities($row['img2']);?></td>-->
@@ -229,8 +225,8 @@ while($row=mysqli_fetch_array($query))
                         }
                         ?>
              </td>
-
-               
+            <td><?php echo '<p><b><a href="stiched.php?custom_id='.$row['custom_id'].'"style="color:red;font-size:17px;">Customized Design Upload</a></b></p>';?>
+              </td> 
               </tr>
                                         </tbody>
                                         <?php $cnt=$cnt+1; } ?>
@@ -238,10 +234,53 @@ while($row=mysqli_fetch_array($query))
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
-                                <h4>Payment Method</h4>
+                                <h4>Confirmed Orders</h4>
                                 <p>
                                     
-                                </p> 
+                                </p>
+                                
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                            <th>Serial No.</th>
+                                            <th>Name</th>
+                                            <th>Contact No.</th>
+                                            <th>Shipping Address</th>
+                                            <th>Product</th>
+                                            <th>Amount</th>
+                                            <th>Order_Date</th>
+                                            
+                                            <th>Action</th>
+                                            <th>Order Status</th>
+                                            </tr>
+                                        </thead>
+                                        <?php
+             // include('config.php');
+              $queryy=mysqli_query($conn,"SELECT tbl_oaddress.fname,tbl_oaddress.lname,tbl_oaddress.phone,tbl_oaddress.address,tbl_oaddress.city,tbl_oaddress.region,tbl_oaddress.district,tbl_oaddress.pincode, tbl_customize.type, tbl_sgarments.sprice,tbl_sgarments.s_date ,tbl_sgarments.s_id,tbl_sgarments.s_action FROM tbl_oaddress INNER JOIN tbl_customize ON tbl_oaddress.log_id = tbl_customize.log_id INNER JOIN tbl_sgarments ON tbl_customize.custom_id = tbl_sgarments.custom_id WHERE tbl_sgarments.status=1;");
+              
+$cnt=1;
+while($row=mysqli_fetch_array($queryy))
+{
+   $s_action=$row['s_action'];
+?>               
+                                        <tbody>
+                                        <tr>
+                  <td><?php echo htmlentities($cnt);?></td>
+                  <td><?php echo htmlentities($row['fname']);?>&nbsp;<?php echo htmlentities($row['lname']);?></td>
+                  <td><?php echo htmlentities($row['phone']);?></td>
+                  <td><?php echo htmlentities($row['address']);?><br><br><?php echo htmlentities($row['city']);?><br><br><?php echo htmlentities($row['region']);?><br><br><?php echo htmlentities($row['district']);?><br><br><?php echo htmlentities($row['pincode']);?></td>
+                  <td><?php echo htmlentities($row['type']);?></td>
+                  <td><?php echo htmlentities($row['sprice']);?></td>
+                  <td><?php echo htmlentities($row['s_date']);?></td> 
+                 <td><?php echo'<p><b><a href="supdate.php?s_id='.$row['s_id'].'"style="color:red;font-size:17px;">Status Update</a></b></p>';?>
+              </td> 
+              <td><?php echo htmlentities($row['s_action']);?></td>
+              </tr>
+                                        </tbody>
+                                        <?php $cnt=$cnt+1; } ?>
+                                    </table>
+                                </div> 
                             </div>
                             <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
                                 <h4>Address</h4>

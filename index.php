@@ -112,7 +112,7 @@
                     <div class="col-md-6">
                         <div class="search">
                             <input type="text" placeholder="Search">
-                            <button onclick="window.location.href='http://192.168.55.27:5000';"><i class="fa fa-search"></i></button>
+                            <button><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                     <div class="col-md-3">

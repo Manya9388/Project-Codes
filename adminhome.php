@@ -74,6 +74,16 @@ else{
                                 </div>
                             </div>
                             
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Product Orders</a>
+                                <div class="dropdown-menu">
+                                    <a  href="delivered-orders.php">Delivered Orders</a>
+                                    <a  href="todays-orders.php">Today's Orders</a>
+                                    <a  href="pending-orders.php">Pending Orders</a>
+                                    <!--<a id="address-nav" data-toggle="pill" href="#productview-tab" role="tab" class="dropdown-item">Products</a>
+                                    <a id="address-nav" data-toggle="pill" href="#tshirtview-tab" role="tab" class="dropdown-item">Tshirts</a>-->
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="navbar-nav ml-auto">
@@ -132,11 +142,12 @@ else{
                 <div class="row">
                     <div class="col-md-3">
                         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-                            <a class="nav-link active" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-cart"></i>Orders</a>
+                            <a class="nav-link active" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-cart"></i>Customized Orders</a>
                            <!-- <a class="nav-link " id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Tshirts</a>-->
                             <a class="nav-link" id="payment-nav" data-toggle="pill" href="#category-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Category</a>
                             <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Products</a>
                             <a class="nav-link" id="account-nav" data-toggle="pill" href="#subc-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Subcategory</a>
+                            <a class="nav-link" id="order-nav" data-toggle="pill" href="#order-tab" role="tab"><i class="fa fa-shopping-bag"></i>Orders</a>
                             <a class="nav-link" href="logout.php"><i class="fa fa-sign-out-alt"></i>Logout</a>
                         </div>
                     </div>
@@ -283,6 +294,8 @@ while($row=mysqli_fetch_array($query))
                                     </table>
                                 </div>
                             </div>
+
+             
                             <div class="tab-pane fade" id="subc-tab" role="tabpanel" aria-labelledby="payment-nav">
                                 
                                 <div class="panel-body">
