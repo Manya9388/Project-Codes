@@ -151,8 +151,8 @@ else{
                             <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
                             <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Orders</a>
                             <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Confirmed Orders</a>
-                           <!-- <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-map-marker-alt"></i>address</a>
-                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#customize-tab" role="tab"><i class="fa fa-user"></i>Feedback</a>-->
+                           <!-- <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-map-marker-alt"></i>address</a>-->
+                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#customize-tab" role="tab"><i class="fa fa-user"></i>Payments</a>
                             <a class="nav-link" href="logout.php"><i class="fa fa-sign-out-alt"></i>Logout</a>
                         </div>
                     </div>
@@ -225,8 +225,21 @@ while($row=mysqli_fetch_array($query))
                         }
                         ?>
              </td>
-            <td><?php echo '<p><b><a href="stiched.php?custom_id='.$row['custom_id'].'"style="color:red;font-size:17px;">Customized Design Upload</a></b></p>';?>
-              </td> 
+            <td>
+            <?php
+  $custom_id = $row['custom_id'];
+  $result = mysqli_query($conn, "SELECT * FROM tbl_sgarments WHERE custom_id = '$custom_id'");
+  if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $advpay_status = $row['advpay_status'];
+    echo '<p style="color:green;font-size:17px;">Product updated</p>';
+    echo '<p style="color:red;font-size:10px;">Advance: '.$advpay_status.'</p>';
+  } else {
+    echo '<p><b><a href="stiched.php?custom_id='.$custom_id.'" style="color:red;font-size:17px;">Customized Design Upload</a></b></p>';
+  }
+?>
+
+</td> 
               </tr>
                                         </tbody>
                                         <?php $cnt=$cnt+1; } ?>
@@ -300,105 +313,55 @@ while($row=mysqli_fetch_array($queryy))
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="customize-tab" role="tabpanel" aria-labelledby="account-nav">
-                               <!-- <h2> Customize </h2>
+                                <h2> Payments </h2>
                                 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   
-  <body>
-    <form method="POST" action="customize.php">
-    
-    <div class="wrapper">
-    
-   
-    <div class="form">
-    <div class="form-group">
-
-
-          <label>Product Type </label>
-          <input type="text" class="input" name="type" placeholder="product name" required>
-       </div>
-       <div class="form-group">
-          <label>Fabric Type </label>
-          <input type="text" class="input" name="fabric" placeholder="fabric" required>
-       </div> 
-       <div class="form-group">
-          <label>Front Style</label>
-          <input type="text" class="input" name="front" placeholder="front style"  required>
-       </div> 
-       
-       <div class="form-group">
-          <label>Colour</label>
-          <input type="text" class="input" name="colour" placeholder="colour"  required>
-       </div>
-       <div class="form-group">
-          <label>Specify Requirements</label>
-          <textarea class="input" name="specify" placeholder="specify" required></textarea>
-       </div>
-       <div class="inputfield">
-          
-          <label for="measure">Size </label>
-                                        <select class="form-control m-bot15" name="size">
-                                        <option>---Select---</option>
-                                    <option>S</option>
-                                    <option>M</option>
-                                    <option>L</option>
-                                    <option>XL</option>
-                                    <option>XXL</option>
-                                    </select>
-       </div> 
-       <div class="inputfield">
-          
-          <label for="measure">Sleeves </label>
-                                        <select class="form-control m-bot15" name="sleeves">
-                                        <option>---Select---</option>
-                                    <option>Full Sleeves</option>
-                                    <option>No Sleeves</option>
-                                    <option>Elbow Sleeves</option>
-                                    <option>Half Sleeves</option>
-                                    <option>Others</option>
-                                    </select>
-       </div> 
-       <div class="inputfield">
-          <label>My Fabric</label>
-          <input type="file" class="form-control" accept="image/gif, image/jpeg, image/png, image/jpg"  name="img1" id="image1">
-       </div> 
-       <div class="inputfield">
-          <label>My Model</label>
-          <input type="file" class="form-control" accept="image/gif, image/jpeg, image/png, image/jpg"  name="img2" id="image2">
-       </div> 
-       <div class="inputfield">
-                                    <?php
-                                    $con=mysqli_connect("localhost","root","","clothing");
-                                    
-                                    
-                                    $sql=mysqli_query($con,"select * from tbl_designerreg"); 
-                                    ?>
-                                    <label>Designer Name</label><br>
-                                    
-                                    
-                                    <select   name="des_id" id="des" onchange="showResult(this.value)" class="form-control m-bot15" required >
-                                    <option value="">--select--</option>
-                                    <?php
-                                    while($row=mysqli_fetch_array($sql))
-                                    {
-                                    
-                                    ?>
-                                    <option value="<?php echo $row[0] ?>" ><?php echo $row[1] ?></option>
-                                    <?php
-                                    
-                                    }
-                                    ?>
-                                    
-                                    </select></div> 
+<div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                            <th>Serial No.</th>
+                                            <th>Date</th>
+                                            <th>Amount</th>
+                                            <th>Payment Status</th>
+                                            </tr>
+                                        </thead>
+                                        <?php
+             // include('config.php');
+             
+                                $sql39=mysqli_query($conn,"SELECT log_id from tbl_login where email='$e'");
+                                while($row=mysqli_fetch_array($sql39))
+                                {
+                                  $a=$row['log_id'];
+                                 
+                                }
+              $queryyy=mysqli_query($conn,"SELECT  `amount`, `advpay_status`, `advpay_date` FROM `tbl_advpayment` WHERE  des_id in(SELECT des_id from tbl_designerreg where log_id = '$a');");
               
-      <div class="inputfield">
-        <input type="submit" value="submit" name="submit" class="btn">-->
-      
-    </div>
-    
-</div>
-</form>
-</body>
+$cnt=1;
+while($row=mysqli_fetch_array($queryyy))
+{
+   
+?>               
+                                        <tbody>
+                                            
+                                        <tr>
+                  <td><?php echo htmlentities($cnt); ?></td>
+                  <td><?php echo htmlentities($row['advpay_date']);?>
+                  <td><?php echo htmlentities($row['amount']);?></td>
+                  <td><?php echo htmlentities($row['advpay_status']);?>
+
+              </tr>
+                                        </tbody>
+                                        <?php $cnt=$cnt+1; } ?>
+                                    </table>
+                                    <?php
+  $queryyy=mysqli_query($conn,"SELECT  SUM(`amount`) as total_amount FROM `tbl_advpayment` WHERE  des_id in(SELECT des_id from tbl_designerreg where log_id = '$a');");
+  $row=mysqli_fetch_array($queryyy);
+  $total_amount = $row['total_amount']; 
+ 
+?>
+<p> <span style="float:right; color:red;"> Total :  <?php echo $total_amount; ?></span></p>
 </html>
                         </div>
                     </div>

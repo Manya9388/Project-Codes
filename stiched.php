@@ -12,8 +12,8 @@
             $img5=$_FILES["img5"]["name"];
             $targetFilePath = $targetDir. $img5;
             move_uploaded_file($_FILES["img5"]["tmp_name"],$targetFilePath);
-            $sql=mysqli_query($conn,"INSERT INTO tbl_sgarments(custom_id,sprice,img5,status) VALUES('$custom_id','$sprice','$img5',0)");
-
+            $sql=mysqli_query($conn,"INSERT INTO tbl_sgarments(custom_id,sprice,img5,advpay_status,status) VALUES('$custom_id','$sprice','$img5','Nill',0)");
+            $sql5=mysqli_query($conn,"UPDATE `tbl_customize` SET `price`='$sprice' WHERE custom_id=$custom_id");
     if($sql)
       {
        

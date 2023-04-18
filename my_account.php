@@ -4,6 +4,7 @@ include('config.php');
 session_start();
 if($_SESSION['email']){
     $e=$_SESSION['email'];
+   
 }
 else{
     header("location:index.php");
@@ -48,6 +49,13 @@ else{
                                  return true;
                                 }
                            </script>
+                           <style>
+  .star {
+    color: #FF6F61;
+  }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>                   
     </head>
 
     <body>
@@ -226,20 +234,19 @@ else{
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
                                 <h4>Dashboard</h4>
-                                <p>
-                                    
                                 </p> 
                             </div>
                             <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
                                 <div class="table-responsive">
+                                  <form action="star.php" method ="POST">
                                     <table class="table table-bordered">
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>No</th>
                                                 <th>Product</th>
                                                 <th>Designer Number</th>
-                                                <!--<th>Price</th>
-                                                <th>Duration</th>-->
+                                                <th>Price</th>
+                                               <!-- <th>Duration</th>-->
                                                 <th>Action</th>
                                                 <th>Status</th>
                                             </tr>
@@ -251,20 +258,36 @@ else{
              {
                $a=$row['log_id'];
              }
-              $query=mysqli_query($conn,"SELECT tbl_customize.type,tbl_customize.status,tbl_designerreg.phone,tbl_customize.custom_id from tbl_customize join tbl_designerreg on tbl_customize.des_id=tbl_designerreg.des_id AND tbl_customize.log_id='$a'");
+              $query=mysqli_query($conn,"SELECT tbl_customize.type,tbl_customize.status,tbl_designerreg.phone,tbl_customize.custom_id,tbl_customize.price from tbl_customize join tbl_designerreg on tbl_customize.des_id=tbl_designerreg.des_id AND tbl_customize.log_id='$a'");
               
 $cnt=1;
 while($row=mysqli_fetch_array($query))
 {
     $custom_id=$row['custom_id'];
+    $price2=$row['price'];
+    $price=$price2/2;
 ?>               
                                         <tbody>
                                         <tr>
                   <td><?php echo htmlentities($cnt);?></td>
                   <td><?php echo htmlentities($row['type']);?></td>
                   <td><?php echo htmlentities($row['phone']);?></td>
-                 <!-- <td><?php echo htmlentities($row['price']);?></td>
-                  <td><?php echo htmlentities($row['duration']);?></td>-->
+                  <td>
+  <?php 
+    $custom_id = $row['custom_id'];
+    $sql = "SELECT s_action FROM tbl_sgarments WHERE custom_id='$custom_id' AND advpay_status='paid'";
+    $result = mysqli_query($conn, $sql);
+    $num_rows = mysqli_num_rows($result);
+    if ($num_rows > 0) {
+      echo "Advance Paid";
+    } else {
+      echo htmlentities($row['price']);
+      echo "<br>";
+      echo '<input type="button" id="rzp-button1" name="btn" value="Advance Pay" class="btn btn-primary" onclick="pay_now('.$price.')"/>';
+    }
+  ?>
+</td>
+<!-- <td><?php echo htmlentities($row['duration']);?></td>-->
             
                 <?php
                if($row['status'] ==2){
@@ -288,7 +311,44 @@ while($row=mysqli_fetch_array($query))
              $sql38=mysqli_query($conn,"SELECT * from tbl_sgarments where custom_id='$custom_id' and status=1");
              while($row=mysqli_fetch_array($sql38))
              {?>
-               <td>Order Confirmed</td>
+               <td>Order Confirmed <br>
+               <form class="rating" method="POST" action="star.php">
+               <input type="hidden" id="name1" value="<?php echo $e; ?>">
+               <input type="text" value="<?php echo $row['custom_id']?>" name="custom_id" hidden>
+               
+                                    <label>
+                                      <input type="radio" name="stars" value="1" />
+                                      <span class="star">★</span>
+                                    </label>
+                                    <label>
+                                      <input type="radio" name="stars" value="2" />
+                                      <span class="star">★</span>
+                                      <span class="star">★</span>
+                                    </label>
+                                    <label>
+                                      <input type="radio" name="stars" value="3" />
+                                      <span class="star">★</span>
+                                      <span class="star">★</span>
+                                      <span class="star">★</span>   
+                                    </label>
+                                    <label>
+                                      <input type="radio" name="stars" value="4" />
+                                      <span class="star">★</span>
+                                      <span class="star">★</span>
+                                      <span class="star">★</span>
+                                      <span class="star">★</span>
+                                    </label>
+                                    <label>
+                                      <input type="radio" name="stars" value="5" />
+                                      <span class="star">★</span>
+                                      <span class="star">★</span>
+                                      <span class="star">★</span>
+                                      <span class="star">★</span>
+                                      <span class="star">★</span>
+                                    </label>
+            
+                                    <button type="submit" name=submit>Submit</button> 
+                              </form></td>
              <?php }
              ?>
               </tr>  
@@ -374,33 +434,128 @@ while($row=mysqli_fetch_array($query))
     <form method="POST" action="customize.php" enctype="multipart/form-data">
     
     <div class="wrapper">
-    
-   
     <div class="form">
     <div class="form-group">
+    <label>Product Type : </label>
+   
+  <select id="dress-select" name="dress-select" onchange="changeProductOptions();changeImage()">
+    <option value="">--Select a Type--</option>
+    <option value="croptop">Crop Tops</option>
+    <option value="gown">Gown</option>
+    <option value="skirt">Skirt</option>
+    <option value="frock">Frock</option>
+  </select><br>
 
+  <div id="image-container"></div><br> 
+<label>Product Name:</label>
+<select id="product-select" name="product-select">
+  <option value="">--Select a Name--</option>
+</select><br>
 
-          <label>Product Type </label>
-          <input type="text" class="input" id="type" name="type" placeholder="product name" required onchange="Validstrr();"/>
-       </div>
+</div>
        
-                                       
+                                    
        <div class="form-group">
           <label>Fabric Type </label>
-          <input type="text" class="input" name="fabric" placeholder="fabric" required>
+          <select id="fabric-select" name="fabric-select" onchange="removeImage()" >
+    <option value="">--Select a Type--</option>
+    <option value="cotton">Cotton</option>
+    <option value="velvet">Velvet</option>
+    <option value="jersey">Jersey</option>
+    <option value="silk">Silk</option>
+    <option value="wool">wool</option>
+    <option value="denim">Denim</option>
+    <option value="satin">Satin</option>
+    <option value="jacquard">Jacquard</option>
+    <option value="linen">Linen</option>
+    <option value="rayon">Rayon</option>
+    <option value="chiffon">Chiffon</option>
+    <option value="chenille">Chenille</option>
+    <option value="baize">Baize</option>
+    <option value="charmeuse">Charmeuse</option>
+    <option value="cheviot">Cheviot</option>
+    <option value="dinity">Dinity</option>
+    <option value="drill">Drill</option>
+    <option value="felt">Felt</option>
+    <option value="twill">Twill</option>
+    <option value="poplin">Poplin</option>
+    <option value="georgette">Georgette</option>
+  </select><br>
+
+  <img id="fimage" src="cimg/fabric-pattern.png" alt="" width="300" height="250" style="float:right;"><br>
        </div> 
        <div class="form-group">
-          <label>Front Style</label>
-          <input type="text" class="input" name="front" placeholder="front style"  required>
-       </div> 
+          <label>Neckline </label>
+          <select id="neck-select" name="neck-select" onchange="removeImage2()" >
+    <option value="">--Select a Type--</option>
+    <option value="round">Round Neck</option>
+    <option value="crew">Crew Neck</option>
+    <option value="high">High Neck</option>
+    <option value="turtle">Turtle Neck</option>
+    <option value="u">U-Neck</option>
+    <option value="square">Square</option>
+    <option value="stapless">Stapless Sweetheart</option>
+    <option value="spagetti">Spagetti Strap</option>
+    <option value="halter">Halter</option>
+    <option value="sweetheart">Sweetheart</option>
+    <option value="v">V-Neck</option>
+    <option value="plunging">Plunging Neckline</option>
+    <option value="cowl">Cowl</option>
+    <option value="haltershap">Halter Shap</option>
+    <option value="jewel">Jewel Neckline</option>
+    <option value="boat">Boat Neckline</option>
+    <option value="off">Off-Shoulder</option>
+    <option value="one">One-Shoulder</option>
+    
+  </select><br>
+
+  <img id="nimage" src="cimg/neckline-pattern.jpg" alt="" width="300" height="250" style="float:right;"><br>
+       </div>
          
        <div class="form-group">
           <label>Colour</label>
-          <input type="text" class="input" name="colour" placeholder="colour"  required>
-       </div>
+          <input type="color" id="colorPicker" name="colour" value="#ff0000">
+       </div><br>
        <div class="form-group">
-          <label>Size Requirements</label>
-          <textarea class="input" name="specify" placeholder="specify" required></textarea>
+      
+       <label for="bust">Bust:</label>
+  <input type="number" id="bust" name="bust" required><br><br>
+
+  <label for="waist">Waist:</label>
+  <input type="number" id="waist" name="waist" required><br><br>
+
+  <label for="hips">Hips:</label>
+  <input type="number" id="hips" name="hips" required><br><br>
+  <img  src="cimg/measures.jpg" alt="" width="350" height="550" style="float:right;"><br>
+  <label for="highhips">High Hips:</label>
+  <input type="number" id="highhips" name="highhips" required><br><br>
+  <label for="arm-length">Arm Length:</label>
+  <input type="number" id="arm-length" name="arm-length" required><br><br>
+  <label for="frontwaist-length">Front Waist Length:</label>
+  <input type="number" id="frontwaist-length" name="frontwaist-length" required><br><br>
+  <label for="backwaist-length">Back Waist Length:</label>
+  <input type="number" id="backwaist-length" name="backwaist-length" required><br><br>
+  <label for="inseam">Inseam:</label>
+  <input type="number" id="inseam" name="inseam" required><br><br>
+
+  <label for="neck">Neck:</label>
+  <input type="number" id="neck" name="neck" required><br><br>
+
+  <label for="shoulder">Shoulder:</label>
+  <input type="number" id="shoulder" name="shoulder" required><br><br>
+
+  <label for="armhole">Armhole:</label>
+  <input type="number" id="armhole" name="armhole" required><br><br>
+
+  <label for="thigh">Thigh:</label>
+  <input type="number" id="thigh" name="thigh" required><br><br>
+
+  <label for="outseam">Outseam:</label>
+  <input type="number" id="outseam" name="outseam" required><br><br>
+
+  <label for="ankle">Ankle:</label>
+  <input type="number" id="ankle" name="ankle" required><br><br>
+
        </div>
        <div class="inputfield">
           
@@ -440,6 +595,8 @@ while($row=mysqli_fetch_array($query))
                                     
                                     
                                     $sql=mysqli_query($con,"select * from tbl_designerreg"); 
+                                   
+                                    
                                     ?>
                                     <label>Designer Name</label><br>
                                     
@@ -453,18 +610,24 @@ while($row=mysqli_fetch_array($query))
                                     ?>
                                     <option value="<?php echo $row[0] ?>" ><?php echo $row[1] ?></option>
                                     <?php
-                                    
+                                     
                                     }
                                     ?>
                                     
-                                    </select></div> 
-                                    <div class="form-group">
-          <label>Expected Price</label>
-          <input type="text" class="input" name="price" placeholder="price"  required>
-       </div>
+                                    </select>
+                                  </div> 
+                                  <div class="form-group">
+  <label>Expected Price</label>
+  <select class="form-control m-bot15" name="rprice">
+    <option value="">---price range---</option>
+    <option value="high">High</option>
+    <option value="medium">Medium</option>
+    <option value="low">Low</option>
+  </select>
+</div>
        <div class="form-group">
           <label>Duration</label>
-          <input type="text" class="input" name="duration" placeholder="Duration"  required>
+          <input type="date" class="input" name="duration" placeholder="Duration" required min="<?php echo date('Y-m-d', strtotime('+1 week')); ?>">
        </div>
               
       <div class="inputfield">
@@ -474,6 +637,9 @@ while($row=mysqli_fetch_array($query))
     
 </div>
 </form>
+   
+    
+
 </body>
 </html>
                         </div>
@@ -489,11 +655,58 @@ while($row=mysqli_fetch_array($query))
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-widget">
-                            <h2>Get in Touch</h2>
+                            
+                                <br>
+                                <h2>Available Designers</h2>
+                                <?php
+
+
+
+// SQL query to get designer info and average rating
+$sql = "SELECT d.fname, d.lname, d.phone, d.city, AVG(r.rating) AS avg_rating
+        FROM tbl_designerreg d
+        INNER JOIN tbl_rating r ON d.des_id = r.des_id
+        GROUP BY d.des_id";
+
+// Execute query
+$result = mysqli_query($conn, $sql);
+
+// Check if there are any results
+if (mysqli_num_rows($result) > 0) {
+
+  // Print table header
+  echo "<table><tr><th> Name</th><th> </th><th>Phone</th><th>City</th><th> Rating</th></tr>";
+
+  // Loop through results and print each row
+  while ($row = mysqli_fetch_assoc($result)) {
+    echo "<tr><td>" . $row["fname"] . "</td><td>" . $row["lname"] . "</td><td>" . $row["phone"] . "</td><td>" . $row["city"] . "</td><td>";
+   
+    // Generate star rating based on average rating value
+    for ($i = 1; $i <= round($row["avg_rating"]); $i++) {
+      echo '<span class="star">&#9733;</span>'; // Unicode star symbol inside a span element with the class "star"
+    }
+    echo "</td></tr>";
+  }
+
+  // Print table footer
+  echo "</table>";
+
+} else {
+  echo "No results found";
+}
+
+
+?>
+
+<br>
+<br>
+<h2>Get in Touch</h2>
                             <div class="contact-info">
                                 <p><i class="fa fa-map-marker"></i>Estore Kottayam, Kerala</p>
                                 <p><i class="fa fa-envelope"></i>estoreclothings@gmail.com</p>
                                 <p><i class="fa fa-phone"></i>+91 9048818583</p>
+                                <br>
+
                             </div>
                         </div>
                     </div>
@@ -523,5 +736,308 @@ function myFunction() {
   window.location.href = "shopping/category.php?cat_id=14";
 }
 </script>
+<script>
+function changeImage() {
+  var select = document.getElementById("dress-select");
+  var container = document.getElementById("image-container");
+  var image= document.createElement("img");
+  image.alt="";
+
+  if (select.value === "croptop") {
+    image.src = "cimg/ctpattern.jpg";
+    image.alt = "croptop";
+    image.width= 450;
+    image.height=400;
+  } else if (select.value === "skirt") {
+    image.src = "cimg/skirtpattern.png";
+    image.alt = "skirt";
+    image.width= 450;
+    image.height=400;
+  } else if (select.value === "frock") {
+    image.src = "cimg/frock-pattern.jpg";
+    image.alt = "frock";
+    image.width= 450;
+    image.height=400;
+  } 
+  else if (select.value === "gown") {
+    image.src = "cimg/gown-pattern.jpg";
+    image.alt = "gown";
+    image.width= 450;
+    image.height=400;
+  }else {
+    container.innerHTML="";
+    return;
+  }
+ 
+  container.innerHTML="";
+  container.appendChild(image);
+}
+</script>
+<script>
+    function removeImage() {
+  var fSelect = document.getElementById("fabric-select");
+  var fImage = document.getElementById("fimage");
+ 
+  if (fSelect.value == "cotton") {
+    fImage.style.display = "none";
+  }
+  else if (fSelect.value == "velvet") {
+    fImage.style.display = "none";
+  }
+  else if (fSelect.value == "jersey") {
+    fImage.style.display = "none";
+  }
+  else if (fSelect.value == "silk") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "wool") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "denim") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "satin") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "jacquard") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "linen") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "rayon") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "chiffon") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "chenille") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "baize") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "charmeuse") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "cheviot") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "dimity") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "drill") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "felt") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "twill") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "poplin") {
+    fImage.style.display = "none";
+  } 
+  else if (fSelect.value == "georgette") {
+    fImage.style.display = "none";
+  } 
+  else {
+    fImage.style.display = "inline-block";
+  }
+}
+    </script>
+
+<script>
+    function removeImage2() {
+  var nSelect = document.getElementById("neck-select");
+  var nImage = document.getElementById("nimage");
+ 
+  if (nSelect.value == "round") {
+    nImage.style.display = "none";
+  }
+  else if (nSelect.value == "crew") {
+    nImage.style.display = "none";
+  }
+  else if (nSelect.value == "high") {
+    nImage.style.display = "none";
+  }
+  else if (nSelect.value == "turtle") {
+    nImage.style.display = "none";
+  }
+  else if (nSelect.value == "u") {
+    nImage.style.display = "none";
+  }
+  else if (nSelect.value == "square") {
+    nImage.style.display = "none";
+  } 
+  else if (nSelect.value == "stapless") {
+    nImage.style.display = "none";
+  }
+  else if (nSelect.value == "spagetti") {
+    nImage.style.display = "none";
+  }
+  else if (nSelect.value == "halter") {
+    nImage.style.display = "none";
+  }
+  else if (nSelect.value == "sweetheart") {
+    nImage.style.display = "none";
+  }
+  else if (nSelect.value == "v") {
+    nImage.style.display = "none";
+  }
+  else if (nSelect.value == "plunging") {
+    nImage.style.display = "none";
+  }
+  else if (nSelect.value == "cowl") {
+    nImage.style.display = "none";
+  }
+  else if (nSelect.value == "halter") {
+    nImage.style.display = "none";
+  }
+  else if (nSelect.value == "jewel") {
+    nImage.style.display = "none";
+  }
+  else if (nSelect.value == "boat") {
+    nImage.style.display = "none";
+  }
+  else if (nSelect.value == "off") {
+    nImage.style.display = "none";
+  }
+  else if (nSelect.value == "one") {
+    nImage.style.display = "none";
+  }
+  
+   else {
+    nImage.style.display = "inline-block";
+  }
+}
+    </script>
+    <script>
+//   console.log("hello");
+// var amt ="100";
+    function pay_now(){
+		var name = jQuery('#name1').val();
+		console.log(name);
+		
+        var amount=<?php echo $price ?>;
+        console.log(amount);
+        var options =  {
+            "key": "rzp_test_LTTLupnsoN3Mu7", // Enter the Key ID generated from the Dashboard
+            "amount": amount*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "Clothing Management System",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "handler":function(response){
+              
+               jQuery.ajax({
+                   type:"POST",
+                   url: "advpayment_process.php",
+                   data:"payment_id="+response.razorpay_payment_id+"&amount="+amount,
+                   success:function(result){
+                       window,location.href="shopping/thankyou.php";
+                   }
+               });
+              
+      }
+        
+    
+};
+var rzp1 = new Razorpay(options);
+
+    rzp1.open();
+    
+    }
+///enable code/////
+
+ 
+</script>
+<script>
+  function changeProductOptions() {
+  const dressSelect = document.getElementById("dress-select");
+  const productSelect = document.getElementById("product-select");
+
+  // Clear existing options in product select dropdown
+  productSelect.innerHTML = "<option value=''>--Select a Name--</option>";
+
+  // Check selected dress type and update product select dropdown accordingly
+  if (dressSelect.value === "croptop") {
+    productSelect.innerHTML += `
+      <option value="belted">Belted</option>
+      <option value="blouson">Blouson</option>
+      <option value="blouse">Blouse</option>
+      <option value="camisole">Camisole</option>
+      <option value="cardigan">Cardigan</option>
+      <option value="bustiere">Bustiere</option>
+      <option value="cropped">Cropped</option>
+      <option value="cross-over">Cross-Over</option>
+      <option value="hoodie">Hoodie</option>
+      <option value="oversize">Oversize</option>
+      <option value="peasant">Peasant</option>
+      <option value="peplum">Peplum</option>
+      <option value="polo">Polo</option>
+      <option value="poncho">Poncho</option>
+      <option value="ruffle">Ruffle</option>
+      <option value="shell">Shell</option>
+      <option value="shirt">Shirt</option>
+      <option value="singlet">Singlet</option>
+      <option value="tiered">Tiered</option>
+      <option value="tiefront">Tie Front</option>
+      <option value="tubetop">Tube Top</option>
+      <option value="tunic">Tunic</option>
+      <option value="twistfront">Twist Front</option>
+      <option value="waterfall">Waterfall</option>
+    `;
+  } else if (dressSelect.value === "gown") {
+    productSelect.innerHTML += `
+      <option value="kaleigh">Kaleigh</option>
+      <option value="arden">Arden</option>
+      <option value="leanna">Leanna</option>
+      <option value="melinda">Melinda</option>
+      <option value="pierrette">Pierrette</option>
+      <option value="veronica">Veronica</option>
+      <option value="iman">Iman</option>
+      <option value="ginger">Ginger</option>
+      <option value="bonnie">Bonnie</option>
+      <option value="carolina">Carolina</option>
+      <option value="demi">Demi</option>
+      <option value="molly">Molly</option>
+      <option value="kaitlynn">Kaitlynn</option>
+      <option value="cora">Cora</option>
+      <option value="misha">Misha</option>
+    `;
+  }else if (dressSelect.value === "skirt") {
+    productSelect.innerHTML += `
+      <option value="a-line skirt">A-Line Skirt</option>
+      <option value="bodycon">Bodycon</option>
+      <option value="boxpleated">Box Pleated</option>
+      <option value="wraparound">Wrap Around</option>
+      <option value="asymmetrical">Asymmetrical</option>
+      <option value="pencil">Pencil</option>
+      <option value="ethnic maxi">Ethnic Maxi</option>
+      <option value="tulle">Tulle</option>
+      <option value="lace">Lace</option>
+      <option value="flared">Flared</option>
+   >
+    `;
+  }else if (dressSelect.value === "frock") {
+    productSelect.innerHTML += `
+      <option value="fullskirt dress">Full Skirt Dress</option>
+      <option value="alineskirt dress">A-line Skirt Dress</option>
+      <option value="wrap dress">Wrap Dress</option>
+      <option value="empire waist dress">Empire Waist Dress</option>
+      <option value="sheath dress">Sheath Dress</option>
+      <option value="bodycon dress">Bodycon Dress</option>
+      <option value="baby doll dress">Baby Doll Dress</option>
+      <option value="shift dress">Shift Dress</option>
+      <option value="spaguetti straps">Spaguetti Straps</option>
+      <option value="halter">Halter</option>
+  
+    `;
+  }
+}
+
+  </script>
+
     </body>
 </html>

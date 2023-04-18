@@ -12,18 +12,37 @@ if(isset($_POST["submit"]))
   {
     $log_id=$row['log_id'];
   }
-    $type=$_POST['type'];
-    $cust_id=$_POST['cust_id'];
+  $dress_select=$_POST['dress-select']; 
+  $product_select=$_POST['product-select'];
+  $fabric_select=$_POST['fabric-select'];
+  $front=$_POST['neck-select'];
+  $bust=$_POST['bust'];
+  $waist=$_POST['waist'];
+  $hips=$_POST['hips'];
+  $highhips=$_POST['highhips'];
+  $arm_length=$_POST['arm-length'];
+  $frontwaist_length=$_POST['frontwaist-length'];
+  $backwaist_length=$_POST['backwaist-length'];
+  $inseam=$_POST['inseam'];
+  $neck=$_POST['neck'];
+  $shoulder=$_POST['shoulder'];
+  $armhole=$_POST['armhole'];
+  $thigh=$_POST['thigh'];
+  $outseam=$_POST['outseam'];
+  $ankle=$_POST['ankle'];
+  $rprice=$_POST['rprice'];
+    $type="null";
+    $cust_id=0;
     $des_id=$_POST['des_id'];
-    $fabric=$_POST['fabric'];
-    $front=$_POST['front'];
+    $fabric="null";
+   
     $img1=$_FILES["img1"]["name"];
     //$img2=$_FILES["img2"]["name"];
     $sleeves=$_POST['sleeves'];
     $colour=$_POST['colour'];
-    $specify=$_POST['specify'];
+    $specify="null";
     $size=$_POST['size'];
-    $price=$_POST['price'];
+    $price=0;
     $duration=$_POST['duration'];
     $targetFilePath = $targetDir. $img1;
     //$targetFilePath2 = $targetDir2. $img2;
@@ -33,9 +52,17 @@ if(isset($_POST["submit"]))
     move_uploaded_file($_FILES["img1"]["tmp_name"],$targetFilePath);
    // move_uploaded_file($_FILES["img2"]["tmp_name"],$targetFilePath2);
 
-    $sql=mysqli_query($conn,"INSERT INTO tbl_customize(type,log_id,des_id,fabric,front,sleeves,colour,specify,size,img1,price,duration) VALUES('$type','$log_id','$des_id','$fabric','$front','$sleeves','$colour','$specify','$size','$img1','$price','$duration')");
-
-    if($sql)
+    $sql="INSERT INTO tbl_customize(type,log_id,des_id,fabric,front,sleeves,colour,specify,size,img1,price,duration) VALUES('$type','$log_id','$des_id','$fabric','$front','$sleeves','$colour','$specify','$size','$img1','$price','$duration')";
+    $result = $conn->query($sql);
+    
+    if($result){
+        $custom_id = $conn->insert_id;
+        
+        $sql4 = "INSERT INTO `tbl_cspecify`( `custom_id`, `dress_select`, `product_select`, `fabric_select`, `bust`, `waist`, `hips`, `highhips`, `arm_length`, `frontwaist_length`, `backwaist_length`, `inseam`, `neck`, `shoulder`, `armhole`, `thigh`, `outseam`, `ankle`, `rprice`, `status`)
+                                    VALUES ('$custom_id','$dress_select','$product_select','$fabric_select','$bust','$waist','$hips','$highhips','$arm_length','$frontwaist_length','$backwaist_length','$inseam','$neck','$shoulder','$armhole','$thigh','$outseam','$ankle','$rprice',0)";
+   $result2 = $conn->query($sql4);
+  }
+    if($sql4)
       {
        
     echo "<script>alert('Requested Successfully!!');window.location='my_account.php'</script>";
@@ -49,4 +76,27 @@ if(isset($_POST["submit"]))
     
   	
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

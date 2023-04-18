@@ -9,8 +9,9 @@
 	<a href="../my_account.php">
 		
 		<h2>Estore</h2>
-
+		
 	</a>
+	
 </div>		
 </div>
 <div class="col-xs-12 col-sm-12 col-md-6 top-search-holder">

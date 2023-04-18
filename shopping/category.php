@@ -200,7 +200,7 @@ while($row=mysqli_fetch_array($sql))
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane active " id="grid-container">
 							<div class="category-product  inner-top-vs">
-							<form method="POST"action="manage_cart.php">												<div class="row">									
+																			<div class="row">									
 			<?php
 $ret=mysqli_query($conn,"select * from tbl_products where cat_id='$cat_id'");
 $num=mysqli_num_rows($ret);
@@ -230,19 +230,21 @@ while ($row=mysqli_fetch_array($ret))
 				<span class="price">
 					Rs. <?php echo htmlentities($row['price']);?>			</span>
 										     <span class="price-before-discount">Rs. <?php echo htmlentities($row['price']);?></span>
-											
+											 <form method="POST"action="manage_cart.php">		
                             <input class="text-center" type='number'  name='quantity' value="1".$row["quantity"]."' min='1' max='50'hidden >				
 			<label for="quantity">Size:</label>
-			<?php echo htmlentities($row['size']);?>   
+			<?php echo htmlentities($row['size']);?> 
+			  
 						</div><!-- /.product-price -->
 			
 		</div><!-- /.product-info -->
+		
 					<div class="cart clearfix animate-effect">
 				<div class="action">
 					<ul class="list-unstyled">
 					<li>
                             <input type="text" value="<?php echo $row['product_id']?>" name="product_id" hidden>
-                            <input type="text" value="<?php echo $_GET['cat_id']?>" name="cat_id" hidden>
+                           <input type="text" value="<?php echo $_GET['cat_id']?>" name="cat_id" hidden>
                             
                         </li>
 						<li class="add-cart-button btn-group">
@@ -260,7 +262,7 @@ while ($row=mysqli_fetch_array($ret))
 						
 					</ul>
 				</div>
-			</div>
+			</div></form>
 			</div>
 			</div>
 		</div>
@@ -271,7 +273,7 @@ while ($row=mysqli_fetch_array($ret))
 		
 <?php } ?>	
 		
-	  </form>
+	 
 		
 										</div>
 							</div>

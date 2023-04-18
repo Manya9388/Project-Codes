@@ -227,7 +227,7 @@ while($row=mysqli_fetch_array($ret))
  <img src="simages/<?php  echo $row['img5'];?>" width="300" height="320" />
                 </a>
             </div>
-			&nbsp;&nbsp;&nbsp;&nbsp;<h4 class="name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price : <?php echo htmlentities($row['sprice']);?></h4>
+			&nbsp;&nbsp;&nbsp;&nbsp;<h4 class="name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price :&nbsp;&nbsp; Rs. <?php  echo htmlentities($row['sprice']/2);?></h4>
         
             
         </div><!-- /.single-product-slider -->
@@ -247,7 +247,7 @@ while($row=mysqli_fetch_array($ret))
 							<h4 class="name">Fabric : <?php echo htmlentities($row['fabric']);?></h4>
 							<h4 class="name">Colour : <?php echo htmlentities($row['colour']);?></h4>
 							<h4 class="name">Size : <?php echo htmlentities($row['size']);?></h4>
-							<br><h6><i> Cash on Delivery</i> </h6>
+							<br><h6><i> Balance payment through Cash on Delivery</i> </h6>
                             <h6><i> Product will be delivered with in one week</i> </h6><br>
 </div>
 <?php } }  ?></form>

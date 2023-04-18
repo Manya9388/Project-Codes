@@ -68,7 +68,7 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
                                 <div class="dropdown-menu">
-                                    <a href="" class="dropdown-item">Wishlist</a>
+                                    <a href="dbrequest.php" class="dropdown-item">Be a Delivery Boy</a>
                                     <a href="login.html" class="dropdown-item">Login & Register</a>
                                     <a href="" class="dropdown-item">Contact Us</a>
                                 </div>
@@ -89,7 +89,7 @@
                                 <div class="dropdown-menu">
                                     <a href="customerReg.php" class="dropdown-item">Customer</a>
                                     <a href="DesignerReg.html" class="dropdown-item">Designer</a>
-                                
+                                    
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if($_SESSION['email']){
-    echo "Welcome Admin";
+
 }
 else{
     header("location:index.php");
@@ -148,6 +148,7 @@ else{
                             <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Products</a>
                             <a class="nav-link" id="account-nav" data-toggle="pill" href="#subc-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Subcategory</a>
                             <a class="nav-link" id="order-nav" data-toggle="pill" href="#order-tab" role="tab"><i class="fa fa-shopping-bag"></i>Orders</a>
+                            <a class="nav-link" href="dapprove.php"><i class="fa fa-sign-out-alt"></i>Delivery Boy Approval</a>
                             <a class="nav-link" href="logout.php"><i class="fa fa-sign-out-alt"></i>Logout</a>
                         </div>
                     </div>
