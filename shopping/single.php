@@ -16,15 +16,15 @@ session_start();
 	<!-- //Meta tag Keywords -->
 
 	<!-- Custom-Files -->
-	<link href="css2/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- Bootstrap css -->
-	<link href="css2/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- Main css -->
 	<link rel="stylesheet" href="css2/fontawesome-all.css">
 	<!-- Font-Awesome-Icons-CSS -->
-	<link href="css2/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- pop-up-box -->
-	<link href="css2/menu.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/menu.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- menu style -->
 	<!-- //Custom-Files -->
 
@@ -56,13 +56,13 @@ session_start();
 		<div class="container">
 			<div class="row header-bot_inner_wthreeinfo_header_mid">
 				<!-- logo -->
-				<div class="col-md-3 logo_agile">
-					<h1 class="text-center">
-						<a href="index.html" class="font-weight-bold font-italic">
-							<img src="images/logo2.png" alt=" " class="img-fluid">E-Store
+				<!--<div class="col-md-3 logo_agile">
+					<center><h1 class="text-center">
+						<a href="index.php" class="font-weight-bold font-italic">
+							E-Store
 						</a>
-					</h1>
-				</div>
+					</h1></center>
+				</div>-->
 				<!-- //logo -->
 				<!-- header-bot -->
 				
@@ -88,7 +88,7 @@ while ($row=mysqli_fetch_array($ret))
 	<div class="product">		
 		<div class="product-image">
 			<div class="image">
-			<img src="<?php echo $a ?>" alt="" width="100" height="200"></a>
+			<img src="<?php echo $a ?>" alt="" width="100" height="750"></a>
 				
 		</div><!-- /.image -->	
 		
@@ -180,7 +180,7 @@ while ($row=mysqli_fetch_array($ret))
 						
 								<?php if($row['quantity'] > 0){?>
 									<input class="text-center" type='number'  name='quantity' value="1".$row["quantity"]."' min='1' max='50'hidden >
-									<div><button class="btn btn-primary icon" data-toggle="dropdown" type="button"><i class="fa fa-shopping-cart"></i></button></div>
+									<!--<div><button class="btn btn-primary icon" data-toggle="dropdown" type="button"><i class="fa fa-shopping-cart"></i></button></div>-->
                                     <div><input class="btn btn-primary" type="submit" name="add_to_cart" value="Add to cart"></div>
 									
 						<input class="btn btn-primary" type="submit" name="wishlist" value="Wishlist">
@@ -196,7 +196,8 @@ while ($row=mysqli_fetch_array($ret))
 						
 					</div>
 					</div>                    
-          <div><input type="submit" name="cancel" value="Cancel" onClick="document.location.href='category.php?pro';"class="btn btn-danger btn-block" />
+          <div><button type="button" class="btn btn-danger btn-block" onclick="document.location.href='index.php';">Cancel</button>
+
 </div>
 </form>
 				</div>

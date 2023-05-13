@@ -92,6 +92,8 @@ else{
                             <a href="shopping/my-cart.php" class="nav-item nav-link">Cart</a>
                            
                             <a href="#" class="nav-item nav-link active">My Account</a>
+                            <a href="http://192.168.43.130:5000/" class="nav-item nav-link active">Search By Image</a>
+                            
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
                                 <div class="dropdown-menu">

@@ -1,22 +1,16 @@
-
 <?php
 session_start();
+if($_SESSION['email']){
 include('config.php');
-$email=$_SESSION['email'];
-if(strlen($_SESSION['email'])==0)
-	{	
-header('login.php');
 }
 else{
-date_default_timezone_set('Asia/Kolkata');// change according timezone
-$currentTime = date( 'd-m-Y h:i:s A', time () );
-
-
+    header("location:index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
+    <head>
+        <meta charset="utf-8">
         <title>Clothing Management System</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="eCommerce " name="keywords">
@@ -36,18 +30,6 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
-		<script language="javascript" type="text/javascript">
-var popUpWin=0;
-function popUpWindow(URLStr, left, top, width, height)
-{
- if(popUpWin)
-{
-if(!popUpWin.closed) popUpWin.close();
-}
-popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width='+600+',height='+600+',left='+left+', top='+top+',screenX='+left+',screenY='+top+'');
-}
-
-</script>
     </head>
 
     <body>
@@ -77,30 +59,62 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto">
-                            <a href="adminhome.php" class="nav-item nav-link">Home</a>
-	
+                
+                        </div>
+                        
+                        <div class="navbar-nav ml-auto">
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Admin</a>
+                                <div class="dropdown-menu">
+                                    
+                                    <a href="logout.php" class="dropdown-item">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Nav Bar End -->      
+        
+        <!-- Bottom Bar Start -->
+        <div class="bottom-bar">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <div class="logo">
+                            <a href="index.html">
+                                <img src="img/logo.png" alt="Logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="search">
+                            <input type="text" placeholder="Search">
+                            <button><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Bottom Bar End --> 
+        
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="adminhome.php">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Products</a></li>
+                    <li class="breadcrumb-item active">Admin</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+        <body>
 
-<body>
 		
-			<div class="span9">
-					<div class="content">
-
-	<div class="module">
-							<div class="module-head">
-								<h3>Today's Orders</h3>
-							</div>
-							<div class="module-body table">
-	<?php if(isset($_GET['del']))
-{?>
-									<div class="alert alert-error">
-										<button type="button" class="close" data-dismiss="alert">×</button>
-									<strong>Oh snap!</strong> 	<?php echo htmlentities($_SESSION['delmsg']);?><?php echo htmlentities($_SESSION['delmsg']="");?>
-									</div>
-<?php } ?>
-
-									<br />
+			
 
 							
 			<table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display table-responsive" >
@@ -114,69 +128,70 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 											<th>Qty </th>
 											<th>Amount </th>
 											<th>Order Date</th>
+                                            <th>Order Status</th>
 											<th>Action</th>
-											
+											<th>Assign Delivery Agent</th>
 										
 										</tr>
 									</thead>
 									<tbody>
 									<?php 
-$email=$_SESSION['email'];
-$sqlq="SELECT log_id from tbl_login where email='$email'";
-$resu = mysqli_query($conn, $sqlq);
-$roww = mysqli_fetch_assoc($resu);
-$log_id= $roww['log_id'];
 
-$cnt = 1;
-$sql_query= mysqli_query($conn,"SELECT tbl_payment.pay_id, tbl_payment.log_id, tbl_order.pay_id, tbl_order.order_id, tbl_payment.cart_id, tbl_payment.amount
-FROM tbl_payment
-LEFT JOIN tbl_order ON tbl_payment.pay_id = tbl_order.pay_id
-WHERE tbl_order.order_status = 'in Process' OR tbl_order.order_status IS NULL OR tbl_order.order_status = 'Delivered' AND tbl_payment.pay_id=tbl_order.pay_id AND tbl_payment.log_id='$log_id'");
-
+$sql_query= mysqli_query($conn,"SELECT fname, lname,log_id, phone, address, city, region, pincode, district
+FROM tbl_oaddress
+WHERE log_id IN (
+  SELECT log_id
+  FROM tbl_payment
+  WHERE pay_id IN (
+    SELECT pay_id
+    FROM tbl_order
+  )
+);");
+$cnt=1;
 while ($row = mysqli_fetch_assoc($sql_query))  {
 
-$data = array();
-$pay_id= $row['pay_id'];
-$order_id = $row['order_id'];
-$cart_id = $row['cart_id'];
-$log_id = $row['log_id'];
 
-$quant=mysqli_query($conn,"select quantity,product_id from tbl_cart where cart_id='$cart_id' ");
+$fname= $row['fname'];
+$lname = $row['lname'];
+$log_id = $row['log_id'];
+$phone = $row['phone'];
+$address = $row['address'];
+$city = $row['city'];
+$region = $row['region'];
+$pincode = $row['pincode'];
+$district = $row['district'];
+
+$quant=mysqli_query($conn,"select amount,pay_id from tbl_payment where pay_id in(select pay_id from tbl_order); ");
 $row = mysqli_fetch_assoc($quant);
 //print_r($row); // check the contents of the $row array
-$quantity=$row['quantity'];
-$product_id=$row['product_id'];
+$amount=$row['amount'];
+$pay_id=$row['pay_id'];
 
 
-$quan=mysqli_query($conn,"select product,price from tbl_products where product_id='$product_id' ");
+$quan=mysqli_query($conn,"select quantity from tbl_cart where cart_id in(SELECT cart_id FROM tbl_payment where pay_id in(SELECT pay_id from tbl_order)); ");
 $row = mysqli_fetch_assoc($quan);
 //print_r($row); // check the contents of the $row array
 
-$product=$row['product'];
-$price=$row['price'];
+$quantity=$row['quantity'];
+
 
 
    
 	// Do something with the retrieved data
 
-	$quet=mysqli_query($conn,"select order_date,order_id from tbl_order where pay_id='$pay_id' ");
+	$quet=mysqli_query($conn,"SELECT product from tbl_products where product_id in (select product_id from tbl_cart where cart_id in(SELECT cart_id FROM tbl_payment where pay_id in(SELECT pay_id from tbl_order))); ");
     $row = mysqli_fetch_assoc($quet);
-    $order_date=$row['order_date'];
-	$order_id=$row['order_id'];
+    
+	$product=$row['product'];
 
 
 
-    $qus=mysqli_query($conn,"select fname,lname,address,city,region,pincode,phone,district from tbl_oaddress where log_id='$log_id'");
+    $qus=mysqli_query($conn,"select order_date,order_id,order_status from tbl_order where pay_id='$pay_id'");
     while($row=mysqli_fetch_array($qus))
     {
-		$fname= $row['fname'];
-		$lname= $row['lname'];
-        $address=$row['address'];
-        $city=$row['city'];
-		$region= $row['region'];
-        $pincode=$row['pincode'];
-        $district=$row['district'];
-        $phone= $row['phone'];
+		$order_date= $row['order_date'];
+        $order_id= $row['order_id'];
+        $order_status= $row['order_status'];
     // ...
 
 
@@ -184,23 +199,38 @@ $price=$row['price'];
 
 <tr>
         <td><?php echo htmlentities($cnt);?></td>
-        <td><?php echo htmlentities($fname);?></td><br>
+        <td><?php echo htmlentities($fname);?><?php echo htmlentities($lname);?></td><br>
         <td><?php echo htmlentities($phone);?></td>
         <td><?php echo htmlentities($address);?><br><?php echo htmlentities($city);?><br><?php echo htmlentities($region);?><br><?php echo htmlentities($pincode);?><br><?php echo htmlentities($district);?></td>
         <td><?php echo htmlentities($product);?></td>
         <td><?php echo htmlentities($quantity);?></td>
-        <td><?php echo htmlentities ($price);?></td>
+        <td><?php echo htmlentities ($amount);?></td>
       <td> <?php echo htmlentities($order_date);?></td>
-        <td><a href="updateorder.php?order_id=<?php echo htmlentities($order_id);?>" title="Update order" target="_blank"><i class="icon-edit"></i></a></td>
+      <td><?php echo htmlentities ($order_status);?></td>
+        <td><a href="updateorder.php?order_id=<?php echo htmlentities($order_id);?>" >Edit</a></td>
+        
+        <?php
+// query the database to check if the order has been assigned to a delivery boy
+$query = "SELECT * FROM tbl_dbassign WHERE order_id = $order_id";
+$result = mysqli_query($conn, $query);
+
+if (mysqli_num_rows($result) > 0) {
+  // the order has been assigned, display "Assigned"
+  echo "<td>Assigned</td>";
+} else {
+  // the order has not been assigned, display the "Assign" link
+  echo "<td><a href='api.php?order_id=".htmlentities($order_id)."&pincode=".htmlentities($pincode)."'>Assign</a></td>";
+}
+?>
     </tr>
 
-    <?php  $cnt=$cnt+1;} }
-
-	
-?>
 
 
 									</tbody>
+                                    <?php  $cnt=$cnt+1;} }
+
+	
+?>
 								</table>
 							</div>
 						</div>						
@@ -215,20 +245,11 @@ $price=$row['price'];
 
 
 
-	<script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
-	<script src="scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
-	<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="scripts/flot/jquery.flot.js" type="text/javascript"></script>
-	<script src="scripts/datatables/jquery.dataTables.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('.datatable-1').dataTable();
-			$('.dataTables_paginate').addClass("btn-group datatable-pagination");
-			$('.dataTables_paginate > a').wrapInner('<span />');
-			$('.dataTables_paginate > a:first-child').append('<i class="icon-chevron-left shaded"></i>');
-			$('.dataTables_paginate > a:last-child').append('<i class="icon-chevron-right shaded"></i>');
-		} );
-	</script>
+	
 </body>
 </html>
-<?php } ?>
+
+
+
+
+

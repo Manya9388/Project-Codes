@@ -6,9 +6,12 @@ if(isset($_POST['submit']))
 $name = $_POST['name'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];
+$address = $_POST['address'];
+$pincode1 = $_POST['pincode'];
+$pincode = "IN/" .$pincode1;
 $image=$_FILES['pdf']['name'];
 move_uploaded_file($_FILES['pdf']['tmp_name'],"dboy/".$image);
-$sql5=mysqli_query($conn,"INSERT INTO tbl_dbrequest(db_name,db_email,db_phone,db_image,db_password,db_status) VALUES('$name','$email','$phone','$image','null',0)");
+$sql5=mysqli_query($conn,"INSERT INTO tbl_dbrequest(db_name,db_email,db_phone,db_image,db_address,db_pincode,db_password,db_status) VALUES('$name','$email','$phone','$image','$address','$pincode','null',0)");
 
   
 }
@@ -116,6 +119,12 @@ return true;
 
 <label>Aadhar Number <span class="required-color">*</span></label>
 <input type="file" name="pdf" id="pdf-upload" required/>
+
+<label for="address">Address:</label>
+<input type="text" id="address" name="address">
+
+<label for="pincode">Pincode:</label>
+<input type="text" id="pincode" name="pincode">
 
 <input type="submit" value="Register"name="submit">
 </form>

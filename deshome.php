@@ -161,7 +161,13 @@ else{
                             <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
                                 <h4>Dashboard</h4>
                                 <p>
-                                    
+                                <?php
+$image_path = "img/designer.jpg"; // replace with the path to your image
+$width = 800; // replace with the desired width of the image
+$height = 300; // replace with the desired height of the image
+
+echo "<img src='$image_path' width='$width' height='$height' alt='Image'>"; // display the image with the specified width and height
+?>   
                                 </p> 
                             </div>
                             <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
@@ -361,7 +367,7 @@ while($row=mysqli_fetch_array($queryyy))
   $total_amount = $row['total_amount']; 
  
 ?>
-<p> <span style="float:right; color:red;"> Total :  <?php echo $total_amount; ?></span></p>
+<p> <span style="float:right; color:red;"> Total : Rs. <?php echo $total_amount; ?></span></p>
 </html>
                         </div>
                     </div>

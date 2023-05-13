@@ -31,7 +31,7 @@ if(isset($_POST["submit"]))
   $outseam=$_POST['outseam'];
   $ankle=$_POST['ankle'];
   $rprice=$_POST['rprice'];
-    $type="null";
+    $type=$dress_select;
     $cust_id=0;
     $des_id=$_POST['des_id'];
     $fabric="null";

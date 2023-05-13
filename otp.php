@@ -5,75 +5,60 @@ include('config.php');
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
-$db_id=$_GET['db_id'];
+$log_id=$_GET['log_id'];
+$order_id = $_GET['order_id'];
 
-if(isset($_POST['submit'])) 
-// code for billing address updation
+// generate OTP
+$otp=rand(1000,9999);
+$_SESSION['otp'] = $otp;
+
+// get email address
+$query3 = mysqli_query($conn,"SELECT email from tbl_login where log_id=$log_id ");
+while($row=mysqli_fetch_array($query3))
 {
-    $db_id = $_POST['db_id'];
-    $db_password = $_POST['db_password'];
-    $db_email= $_POST['db_email'];
-  $query=mysqli_query($conn,"UPDATE `tbl_dbrequest` SET `db_password`='$db_password',`db_status`=1 WHERE db_id='$db_id'");
-  $query3 = mysqli_query($conn,"INSERT INTO tbl_login (email,password,role,status) VALUES ('$db_email','$db_password','dboy',0)");
-  if($query)
-  {
-   
-   
-require 'vendor/autoload.php';
-include 'config.php';
-$mail = new PHPMailer(true);
+    $email=$row['email'];
+    
+    if($query3)
+    {
+        require 'vendor/autoload.php';
+        include 'config.php';
+        $mail = new PHPMailer(true);
 
-if(isset($_GET['db_id'])){
-    $db_id = $_GET['db_id'];
-    $query=mysqli_query($conn,"SELECT * FROM tbl_dbrequest WHERE db_id='$db_id'");
-    while($row=mysqli_fetch_array($query)){
-        $db_email = $row['db_email'];
-        $db_password = $row['db_password'];
-        
-    }
+        try {
+            // SMTP settings
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'manyamadhu2023b@mca';
+            $mail->Password = '####';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            // Email properties
+            $mail->setFrom('manyamadhu2023b@mca.ajce.in', 'Admin');
+            $mail->addAddress($email, 'Estore Customer');
+            $mail->Subject = 'Otp Verification';
+            $mail->Body = 'Hello,
+                            Please verify your product delivery with this OTP : ' . $otp .'
+                             Best regards,
+                             Admin 
+                             Estore';
+
+            // Send email
+            $mail->send();
+            echo "<script>
+                alert('Email sent successfully!');
+                
+            </script>";
+        } catch (Exception $e) {
+            echo "Email sending failed. Error: " . $mail->ErrorInfo;
+        }
+    }  
 }
 
-try {
-    // SMTP settings
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
-    $mail->SMTPAuth = true;
-    $mail->Username = 'manyamadhu2023b@mca.ajce.in';
-    $mail->Password = 'manyamca@8086024979';
-    $mail->SMTPSecure = 'tls';
-    $mail->Port = 587;
+// display OTP form
 
-    // Email properties
-    $mail->setFrom('manyamadhu2023b@mca.ajce.in', 'Admin');
-    $mail->addAddress($db_email, 'DBoy');
-    $mail->Subject = 'Request Approval & Login credentials';
-    $mail->Body = 'Hello,
-                        I am pleased to inform you that your job request as a delivery agent has been approved by the concerned authorities.
-                        You can login into the website by using email ("Same as registered email") and password : ' . $db_password .'
-                         Best regards,
-                         Admin 
-                         Estore';
-
-
-    // Send email
-    $mail->send();
-    echo "<script>
-        alert('Email sent successfully!');
-        window.location.href='adminhome.php';
-    </script>";
-} catch (Exception $e) {
-    echo "Email sending failed. Error: " . $mail->ErrorInfo;
-}
-
-
-    
-    
-    
-  
-  }
-}
 ?>
-
 <html>
     <head>
     <html lang="en">
@@ -140,8 +125,8 @@ try {
 			font-weight: bold;
 			margin-bottom: 10px;
 		}
-		input[type="email"],
-		input[type="password"] {
+		input[type="text"],
+		 {
 			width: 100%;
 			padding: 10px;
 			border-radius: 5px;
@@ -196,27 +181,15 @@ try {
             </div>
         </div>
        
-                    <h1>APPROVAL</h1>
-	<form method="POST" action="#">
-    <?php
-   
-    $sql = "SELECT db_email,db_id FROM tbl_dbrequest where db_id='$db_id'";
-$result = $conn->query($sql);
+                    <h1>OTP Verify</h1>
+	
+                    <form method="POST" action="verify_otp.php">
+  <input type="hidden" name="order_id" value="<?php echo htmlentities($order_id); ?>">
+  <label>OTP:</label>
+  <input type="text" name="otp">
+  <button type="submit">Confirm</button>
+</form>
 
-// Output the results
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $db_email= $row["db_email"];
-    ?>
-        <input type="text" id="db_id" name="db_id" value="<?php echo $row['db_id'];?>" hidden>
-		<label for="email">Email:</label>
-		<input type="email" id="email" name="db_email" value="<?php echo $row['db_email'];?>"><?php }} ?>
-		<label for="password">Password:</label>
-		<input type="password" id="password" name="db_password">
-       
-		<div class="error"><?php if(isset($error)){echo $error;} ?></div>
-		<input type="submit" name="submit" value="SEND">
-	</form>
 
         
     </body>  

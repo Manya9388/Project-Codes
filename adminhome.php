@@ -147,7 +147,7 @@ else{
                             <a class="nav-link" id="payment-nav" data-toggle="pill" href="#category-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Category</a>
                             <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Products</a>
                             <a class="nav-link" id="account-nav" data-toggle="pill" href="#subc-tab" role="tab"><i class="fa fa-shopping-bag"></i>Add Subcategory</a>
-                            <a class="nav-link" id="order-nav" data-toggle="pill" href="#order-tab" role="tab"><i class="fa fa-shopping-bag"></i>Orders</a>
+                           <!-- <a class="nav-link" id="order-nav" data-toggle="pill" href="#order-tab" role="tab"><i class="fa fa-shopping-bag"></i>Orders</a>-->
                             <a class="nav-link" href="dapprove.php"><i class="fa fa-sign-out-alt"></i>Delivery Boy Approval</a>
                             <a class="nav-link" href="logout.php"><i class="fa fa-sign-out-alt"></i>Logout</a>
                         </div>
@@ -576,7 +576,7 @@ while($row=mysqli_fetch_array($query))
                         echo '<p><a href="proactivate.php?id='.$row['product_id'].'$status=0">ACTIVE</a></p>';
                     }
                     ?>
-               <td><a href="proedit.php?product_id=<?php echo $row['product_id']?>">EDIT</a></td>
+               <td><a href="proedit.php?product_id=<?php echo $row['product_id']?>">UPDATE</a></td>
               </tr>
               <?php $cnt=$cnt+1; } ?>
               
@@ -658,16 +658,32 @@ while($row=mysqli_fetch_array($query))
                                     
                                        <div class="row">
                                          
-                                        <div class="col-md-4 form-group">
-                                        <label for="qua">Product Quantity</label>
-                                    <input type="number"  class="form-control" name="quantity" min=0 max=10>
-                                    
-                                    </div>
+
                                     
                                     <div class="col-md-3 form-group">
                                     
-                                        <label for="measure">Size </label>
-                                        <select class="form-control m-bot15" name="size">
+                                        <label for="measure">Size 1 </label>
+                                        <select class="form-control m-bot15" name="size1">
+                                        <option>---Select---</option>
+                                    <option>S</option>
+                                    <option>M</option>
+                                    <option>L</option>
+                                    <option>XL</option>
+                                    <option>XXL</option>
+                                    </select>
+
+                                    <label for="measure">Size 2</label>
+                                        <select class="form-control m-bot15" name="size2">
+                                        <option>---Select---</option>
+                                    <option>S</option>
+                                    <option>M</option>
+                                    <option>L</option>
+                                    <option>XL</option>
+                                    <option>XXL</option>
+                                    </select>
+
+                                    <label for="measure">Size 3 </label>
+                                        <select class="form-control m-bot15" name="size3">
                                         <option>---Select---</option>
                                     <option>S</option>
                                     <option>M</option>
@@ -676,7 +692,42 @@ while($row=mysqli_fetch_array($query))
                                     <option>XXL</option>
                                     </select>
                                     
+                                    <label for="measure">Size 4</label>
+                                        <select class="form-control m-bot15" name="size4">
+                                        <option>---Select---</option>
+                                    <option>S</option>
+                                    <option>M</option>
+                                    <option>L</option>
+                                    <option>XL</option>
+                                    <option>XXL</option>
+                                    </select>
+
+                                    <label for="measure">Size 5</label>
+                                        <select class="form-control m-bot15" name="size5">
+                                        <option>---Select---</option>
+                                    <option>S</option>
+                                    <option>M</option>
+                                    <option>L</option>
+                                    <option>XL</option>
+                                    <option>XXL</option>
+                                    </select>
                                     
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label for="qua">Product Quantity 1</label>
+                                    <input type="number"  class="form-control" name="quantity1" min=0 max=10>
+                                    
+                                    <label for="qua">Product Quantity 2</label>
+                                    <input type="number"  class="form-control" name="quantity2" min=0 max=10>
+
+                                    <label for="qua">Product Quantity 3</label>
+                                    <input type="number"  class="form-control" name="quantity3" min=0 max=10>
+
+                                    <label for="qua">Product Quantity 4</label>
+                                    <input type="number"  class="form-control" name="quantity4" min=0 max=10>
+
+                                    <label for="qua">Product Quantity 5</label>
+                                    <input type="number"  class="form-control" name="quantity5" min=0 max=10>
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label for="price">Price</label>
@@ -686,7 +737,7 @@ while($row=mysqli_fetch_array($query))
                                     
                                     </div>
                                     </div>
-                                    <button type="submit" name="btnsubmit3"class="btn btn-info">Submit</button>
+                                    <center><button type="submit" name="btnsubmit3"class="btn btn-info">Submit</button></center>
                                     </form>
                                     </div>
                                 </div>

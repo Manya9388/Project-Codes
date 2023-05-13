@@ -45,6 +45,12 @@ if(isset($_POST['submit']))
 	   header("location:deshome.php");
 	  exit(0);
 	}
+	else if($_SESSION['role']=='dboy')
+	{
+	  $_SESSION['message']="Welcome";
+	   header("location:dbhome.php");
+	  exit(0);
+	}
 }
   else
   {

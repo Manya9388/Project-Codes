@@ -12,9 +12,11 @@ $log_id= $row['log_id'];
 $sql = mysqli_query($conn, "SELECT * from tbl_cart where log_id='$log_id'");
 while($row = mysqli_fetch_array($sql)){
     $cart_id = $row['cart_id'];
-    
+    $product_id= $row['product_id'];
+    $quantity = $row['quantity'];
     $amt = $_POST['amount'];
     $payment_status = "completed";
+    
     $sql3 = "INSERT INTO `tbl_payment`(`amount`, `payment_status`, `log_id`, `cart_id`) VALUES ('$amt', '$payment_status', '$log_id', '$cart_id')";
     $result = $conn->query($sql3);
     
